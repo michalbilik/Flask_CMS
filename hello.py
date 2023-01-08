@@ -263,6 +263,7 @@ def index():
 		favorite_pizza = favorite_pizza)
  
 @app.route('/add', methods=['GET', 'POST'])
+@login_required 
 def add_user():
     name = None
     form = UserForm()
@@ -290,6 +291,7 @@ def add_user():
 #Create Password Test Page
 # Create Password Test Page
 @app.route('/test_pw', methods=['GET', 'POST'])
+@login_required 
 def test_pw():
 	email = None
 	password = None
