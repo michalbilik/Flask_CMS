@@ -5,9 +5,12 @@ from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash 
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from webforms import LoginForm, PostForm, UserForm, PasswordForm, NamerForm
+from flask_ckeditor import CKEditor
+
 
 # Create a Flask Instance
 app = Flask(__name__)
+ckeditor = CKEditor(app)
 
 #Secret Key
 app.config['SECRET_KEY'] = "secret key for CRF"
@@ -27,6 +30,8 @@ login_manager.login_view = 'login'
 @login_manager.user_loader
 def load_user(user_id):
 	return Users.query.get(int(user_id))
+
+
 
 
 #################################### ROUTES ####################################

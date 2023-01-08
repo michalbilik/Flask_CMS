@@ -19,7 +19,7 @@
 	<small>By: {{ post.author }}<br/>
 	{{ post.date_posted }}</small> <br/><br/>
 
-	{{ post.content }}
+	{{ post.content|safe }}
     <br/><br/>
     <a href="{{url_for('post', id=post.id)}}" class="btn btn-outline-secondary"> View Project </a>
     {% if current_user.is_authenticated %}
