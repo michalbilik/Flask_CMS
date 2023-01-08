@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, request
 from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired #later add validator for email etc
@@ -41,6 +41,32 @@ class UserForm(FlaskForm):
 class NamerForm(FlaskForm):
 	name = StringField("What's Your Name", validators=[DataRequired()])
 	submit = SubmitField("Submit")
+ 
+ 
+#Update Database Record Page
+@app.route('/update/<int:id>', methods=['GET', 'POST']) 
+def update(id):
+	form = UserForm()
+	name_to_update = Users.query.get_or_404(id)
+	if request.method == "POST":
+		name_to_update.name = request.form['name']
+		name_to_update.email = request.form['email']
+		try:
+			db.session.commit()
+			flash("User Updated Successfully!")
+			return render_template("update.html", 
+				form=form,
+				name_to_update = name_to_update)
+		except:
+			flash("Error!  Looks like there was a problem...try again!")
+			return render_template("update.html", 
+				form=form,
+				name_to_update = name_to_update)
+	else:
+		return render_template("update.html", 
+				form=form,
+				name_to_update = name_to_update)
+      
 
 # Create a route decorator
 @app.route('/')
