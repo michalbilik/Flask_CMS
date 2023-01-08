@@ -43,7 +43,7 @@ def aboutMe():
 
 
 # NAME
-@app.route('/name', methods=['GET', 'POST'])
+@app.route('/contact', methods=['GET', 'POST'])
 def name():
 	name = None
 	form = NamerForm()
@@ -52,7 +52,7 @@ def name():
 		name = form.name.data
 		form.name.data = ''
 
-	return render_template("name.html", 
+	return render_template("contact.html", 
 		name = name,
 		form = form)
 
@@ -125,7 +125,7 @@ def update(id):
 	if request.method == "POST":
 		name_to_update.name = request.form['name']
 		name_to_update.email = request.form['email']
-		name_to_update.favorite_color = request.form['favorite_color']
+		name_to_update.about_author = request.form['about_author']
 		name_to_update.username = request.form['username']
 		try:
 			db.session.commit()
@@ -154,7 +154,6 @@ def dashboard(): #copied data (below) from Update function so our dashboard has 
 	if request.method == "POST":
 		name_to_update.name = request.form['name']
 		name_to_update.email = request.form['email']
-		name_to_update.favorite_color = request.form['favorite_color']
 		name_to_update.username = request.form['username']
 		try:
 			db.session.commit()
@@ -277,14 +276,13 @@ def add_user():
         if user is None: #if user doesn't eixsts
             #hashing the passowrd
             hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
-            user = Users(name=form.name.data, username=form.username.data, email=form.email.data, favorite_color=form.favorite_color.data, password_hash=hashed_pw)            
+            user = Users(name=form.name.data, username=form.username.data, email=form.email.data, password_hash=hashed_pw)            
             db.session.add(user)
             db.session.commit()
         name = form.name.data
         form.name.data = ''
         form.username.data = ''
         form.email.data = ''
-        form.favorite_color.data = ''
         form.password_hash.data = ''
     our_users = Users.query.order_by(Users.date_added)
     return render_template("add_user.html", 
@@ -369,7 +367,7 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(20), nullable=False, unique=True)
     name = db.Column(db.String(50), nullable=False) #nullabe=False this feeld cannot be empty
     email = db.Column(db.String(200), nullable=False, unique=True) #checks if this email was used before
-    favorite_color = db.Column(db.String(120))
+    about_author = db.Column(db.Text(2000), nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     #passwords
     password_hash = db.Column(db.String(128))

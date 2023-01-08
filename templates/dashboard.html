@@ -14,39 +14,48 @@
 
 
 
-<h2>Dashboard</h2><br/>
+<h2>Dashboard</h2>
+<br/>
 <div class="card">
-    <div class="card-header">
-        {{ current_user.name }}
-    </div>
-    <div class="card-body">
-          <h5 class="card-title">Welcome To Your User Dashboard...</h5>
-            <p class="card-text">
+   <div class="card-header">
+      {{ current_user.name }}
+   </div>
+   <div class="card-body">
+      <h5 class="card-title"></h5>
+      <p class="card-text">
+      <div class="container">
+         <div class="row">
+            <div class="col-8"
             <strong>Name:</strong> {{current_user.name}} <br/>
             <strong>Username:</strong> {{current_user.username}} <br/>
+            <strong>About author:</strong>{{current_user.about_author}}<br/><br/>
             <strong>User ID:</strong> {{current_user.id}} <br/>
             <strong>Email</strong> {{current_user.email}} <br/>
-            <strong>Favorite Color:</strong> {{current_user.favorite_color}} <br/>
             <strong>Data of creation:</strong> {{current_user.date_added}} <br/>
-            </p>
-            <br/>
+            <br/><br/>
             <a href="{{ url_for('logout')}}" class="btn btn-secondary">Logout</a>
-            <a href="{{ url_for('update', id=current_user.id)}}" class="btn btn-secondary"> Edit </a>
+            <a href="{{ url_for('update', id=current_user.id)}}" class="btn btn-secondary">Edit Profile</a>
             <a href="{{ url_for('delete', id=current_user.id)}}" class="btn btn-danger">Delete</a>
-        </div>
-    </div>
-
-    <br/>
-
-    <div class="card">
-        <div class="card-header">
-            Tools
-        </div>
-            <div class="card-body">
-                <a href="{{ url_for('add_user')}}" class="btn btn-secondary">Add Admin</a>
-                <a href="{{ url_for('add_post')}}" class="btn btn-secondary">Add Project</a>
-            </div>
-    </div>
+         </div>
+         <div class="col-4">
+            <img src={{ url_for('static',
+            filename='images/avatar.png')}} width="200" align="right">
+         </div>
+      </div>
+   </div>
+   </p>       
+</div>
+</div>
+<br/>
+<div class="card">
+   <div class="card-header">
+      Tools
+   </div>
+   <div class="card-body">
+      <a href="{{ url_for('add_user')}}" class="btn btn-secondary">Add Admin</a>
+      <a href="{{ url_for('add_post')}}" class="btn btn-secondary">Add Project</a>
+   </div>
+</div>
 </div>
 
 

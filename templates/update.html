@@ -14,49 +14,47 @@
 
 {% if id == current_user.id %}
 
-	<h1>Update User...</h1>				<br/><br/>
-	ID to update: {{ id }}				<br/>
-	Current ID: {{current_user.id}}		<br/><br/>
+		<h1>Update User...</h1>				<br/><br/>
+		ID to update: {{ id }}				<br/>
+		Current ID: {{current_user.id}}		<br/><br/>
 
-<div class="shadow p-3 mb-5 bg-body rounded">
-	<form action="/update/{{ name_to_update.id }}" method="POST">
-		{{ form.hidden_tag() }}
+	<div class="shadow p-3 mb-5 bg-body rounded">
+		<form action="/update/{{ name_to_update.id }}" method="POST">
+			{{ form.hidden_tag() }}
 
-		{{ form.name.label(class="form-label") }}
+			{{ form.name.label(class="form-label") }}
 
-		{{ form.name(class="form-control", value=name_to_update.name) }}
-		<br/>
+			{{ form.name(class="form-control", value=name_to_update.name) }}
+			<br/>
 
-		{{ form.username.label(class="form-label") }}
+			{{ form.username.label(class="form-label") }}
 
-		{{ form.username(class="form-control", value=name_to_update.username) }}
-		<br/>
+			{{ form.username(class="form-control", value=name_to_update.username) }}
+			<br/>
 
-		{{ form.email.label(class="form-label") }}
+			{{ form.email.label(class="form-label") }}
 
-		{{ form.email(class="form-control", value=name_to_update.email) }}
-        <br/>
-        
-        {{ form.favorite_color.label(class="form-label") }}
+			{{ form.email(class="form-control", value=name_to_update.email) }}
+			<br/>
 
-		{{ form.favorite_color(class="form-control", value=name_to_update.favorite_color) }}
-		<br/>
+			{{ form.about_author.label(class="form-label") }}
 
-		{{ form.submit(class="btn btn-secondary") }}
+			<textarea name="about_author" class="form-control">{{name_to_update.about_author}}</textarea>
+			<br/>
 
-		<a href="{{ url_for('delete', id=id)}}" class="btn btn-danger">Delete</a>
+			{{ form.submit(class="btn btn-secondary") }}
 
-
-	</form>
-</div>
-<br/><br/><br/>
+			<a href="{{ url_for('delete', id=id)}}" class="btn btn-danger">Delete</a>
+		</form>
+	</div>
+	<br/><br/><br/>
 
 {% else %}
 
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-	Sorry! You can't edit this user.
-	<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-  </div>
+	<div class="alert alert-warning alert-dismissible fade show" role="alert">
+		Sorry! You can't edit this user.
+		<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+	</div>
 
 {% endif %}
 
