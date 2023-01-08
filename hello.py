@@ -7,6 +7,7 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash 
 from wtforms.widgets import TextArea
+from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 
 
 # Create a Flask Instance
@@ -24,6 +25,56 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localh
 #Initialize The Database
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
+
+# Flask_Login Stuff
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.login_view = 'login'
+
+@login_manager.user_loader
+def load_user(user_id):
+	return Users.query.get(int(user_id))
+
+# Create Login Form
+class LoginForm(FlaskForm):
+	username = StringField("Username", validators=[DataRequired()])
+	password = PasswordField("Password", validators=[DataRequired()])
+	submit = SubmitField("Login")
+
+
+# Create Login Page
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+	form = LoginForm()
+	if form.validate_on_submit():
+		user = Users.query.filter_by(username=form.username.data).first()
+		if user:
+			# Check the hash
+			if check_password_hash(user.password_hash, form.password.data):
+				login_user(user)
+				flash("Login Succesfull.")
+				return redirect(url_for('dashboard'))
+			else:
+				flash("Wrong password or user - Try Again!")
+		else:
+			flash("Wrong password or user - Try Again!")
+
+
+	return render_template('login.html', form=form)
+
+#Create Logout Page
+@app.route('/logout', methods=['GET', 'POST'])
+@login_required
+def logout():
+	logout_user()
+	flash("You Have Been Logged Out!  Thanks For Stopping By...")
+	return redirect(url_for('login'))
+
+#Create dashboard Page
+@app.route('/dashboard', methods=['GET', 'POST'])
+@login_required
+def dashboard():
+	return render_template('dashboard.html')
 
 #Create a blog post model
 class Posts(db.Model):
@@ -55,6 +106,7 @@ def post(id):
     return render_template('post.html', post=post)
     
 @app.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit_post(id):
     post = Posts.query.get_or_404(id)
     form = PostForm()
@@ -75,6 +127,7 @@ def edit_post(id):
     return render_template('edit_post.html', form=form)
 
 @app.route('/posts/delete/<int:id>')
+@login_required
 def delete_post(id):
     post_to_delete = Posts.query.get_or_404(id)
     
@@ -99,6 +152,7 @@ def delete_post(id):
     
 #html website to add posts
 @app.route('/add-post', methods=['GET', 'POST'])
+@login_required
 def add_post():
 	form = PostForm()
 
@@ -122,13 +176,15 @@ def add_post():
 
 #Json test
 @app.route('/date')
+@login_required
 def get_current_date():
     return {"Date": date.today()}
 
 
 #Create db Model
-class Users(db.Model):
+class Users(db.Model, UserMixin):
     id = db.Column(db.Integer, primary_key=True) #primary_key - this makes a uniqe ID
+    username = db.Column(db.String(20), nullable=False, unique=True)
     name = db.Column(db.String(50), nullable=False) #nullabe=False this feeld cannot be empty
     email = db.Column(db.String(200), nullable=False, unique=True) #checks if this email was used before
     favorite_color = db.Column(db.String(120))
@@ -154,6 +210,7 @@ class Users(db.Model):
     
 class UserForm(FlaskForm):
 	name = StringField("Name", validators=[DataRequired()])
+	username = StringField("Username", validators=[DataRequired()])
 	email = StringField("Email", validators=[DataRequired()])
 	favorite_color = StringField("Favorite Color")
 	password_hash = PasswordField('Password', validators=[DataRequired(), EqualTo('password_hash2', message='Passwords Must Match!')])
@@ -162,6 +219,7 @@ class UserForm(FlaskForm):
     
     
 @app.route('/delete/<int:id>')
+@login_required
 def delete(id):
 	user_to_delete = Users.query.get_or_404(id)
 	name = None
@@ -185,7 +243,8 @@ def delete(id):
  
  
 #Update Database Record Page
-@app.route('/update/<int:id>', methods=['GET', 'POST']) 
+@app.route('/update/<int:id>', methods=['GET', 'POST'])
+@login_required 
 def update(id):
 	form = UserForm()
 	name_to_update = Users.query.get_or_404(id)
@@ -265,11 +324,12 @@ def add_user():
         if user is None: #if user doesn't eixsts
             #hashing the passowrd
             hashed_pw = generate_password_hash(form.password_hash.data, "sha256")
-            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data, password_hash=hashed_pw)            
+            user = Users(name=form.name.data, username=form.username.data, email=form.email.data, favorite_color=form.favorite_color.data, password_hash=hashed_pw)            
             db.session.add(user)
             db.session.commit()
         name = form.name.data
         form.name.data = ''
+        form.username.data = ''
         form.email.data = ''
         form.favorite_color.data = ''
         form.password_hash.data = ''
