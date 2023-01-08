@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, SubmitField
 from wtforms.validators import DataRequired #later add validator for email etc
 from flask_sqlalchemy import SQLAlchemy
+from flask_migrate import Migrate
 from datetime import datetime
 
 # Create a Flask Instance
@@ -19,12 +20,14 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localh
 
 #Initialize The Database
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
 
 #Create db Model
 class Users(db.Model):
     id = db.Column(db.Integer, primary_key=True) #primary_key - this makes a uniqe ID
     name = db.Column(db.String(50), nullable=False) #nullabe=False this feeld cannot be empty
     email = db.Column(db.String(200), nullable=False, unique=True) #checks if this email was used before
+    favorite_color = db.Column(db.String(120))
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     
     #Create a string
@@ -34,13 +37,31 @@ class Users(db.Model):
 class UserForm(FlaskForm):
 	name = StringField("Name", validators=[DataRequired()])
 	email = StringField("Email", validators=[DataRequired()])
+	favorite_color = StringField("Favorite Color")
 	submit = SubmitField("Submit")
     
+    
+@app.route('/delete/<int:id>')
+def delete(id):
+	user_to_delete = Users.query.get_or_404(id)
+	name = None
+	form = UserForm()
 
-#Create a Form Class
-class NamerForm(FlaskForm):
-	name = StringField("What's Your Name", validators=[DataRequired()])
-	submit = SubmitField("Submit")
+	try:
+		db.session.delete(user_to_delete)
+		db.session.commit()
+		flash("User Deleted Successfully!")
+
+		our_users = Users.query.order_by(Users.date_added)
+		return render_template("add_user.html", 
+		form=form,
+		name=name,
+		our_users=our_users)
+
+	except:
+		flash("Whoops! There was a problem deleting user, try again...")
+		return render_template("add_user.html", 
+		form=form, name=name,our_users=our_users)
  
  
 #Update Database Record Page
@@ -51,6 +72,7 @@ def update(id):
 	if request.method == "POST":
 		name_to_update.name = request.form['name']
 		name_to_update.email = request.form['email']
+		name_to_update.favorite_color = request.form['favorite_color']
 		try:
 			db.session.commit()
 			flash("User Updated Successfully!")
@@ -65,8 +87,13 @@ def update(id):
 	else:
 		return render_template("update.html", 
 				form=form,
-				name_to_update = name_to_update)
+				name_to_update = name_to_update,
+				id = id)
       
+# Create a Form Class
+class NamerForm(FlaskForm):
+	name = StringField("What's Your Name", validators=[DataRequired()])
+	submit = SubmitField("Submit")
 
 # Create a route decorator
 @app.route('/')
@@ -86,7 +113,6 @@ def aboutMe():
 	return render_template("aboutMe.html")
 
 @app.route('/user/<name>')
-
 def user(name):
 	return render_template("user.html", user_name=name)
 
@@ -103,6 +129,28 @@ def page_not_found(e):
 	return render_template("500.html"), 500
 
 
+
+ 
+@app.route('/add', methods=['GET', 'POST'])
+def add_user():
+    name = None
+    form = UserForm()
+    if form.validate_on_submit(): #if the form is submited and it is valid then
+        user = Users.query.filter_by(email=form.email.data).first() #we check if the new user exists with this email
+        if user is None: #if user doesn't eixsts
+            user = Users(name=form.name.data, email=form.email.data, favorite_color=form.favorite_color.data)            
+            db.session.add(user)
+            db.session.commit()
+        name = form.name.data
+        form.name.data = ''
+        form.email.data = ''
+        form.favorite_color.data = ''
+    our_users = Users.query.order_by(Users.date_added)
+    return render_template("add_user.html", 
+        form = form,
+        name = name,
+        our_users = our_users)
+    
 @app.route('/name', methods=['GET', 'POST'])
 def name():
 	name = None
@@ -115,23 +163,4 @@ def name():
 	return render_template("name.html", 
 		name = name,
 		form = form)
- 
-@app.route('/add', methods=['GET', 'POST'])
-def add_user():
-    name = None
-    form = UserForm()
-    if form.validate_on_submit(): #if the form is submited and it is valid then
-        user = Users.query.filter_by(email=form.email.data).first() #we check if the new user exists with this email
-        if user is None: #if user doesn't eixsts
-            user = Users(name=form.name.data, email=form.email.data)
-            db.session.add(user)
-            db.session.commit()
-        name = form.name.data
-        form.name.data = ''
-        form.email.data = ''
-    our_users = Users.query.order_by(Users.date_added)
-    return render_template("add_user.html", 
-        form = form,
-        name = name,
-        our_users = our_users)
  
