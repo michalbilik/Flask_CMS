@@ -12,7 +12,10 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = "secret key for CRF"
 
 #Add Database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+
+#Connecting to MySQL DB
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
 
 #Initialize The Database
 db = SQLAlchemy(app)
@@ -38,21 +41,6 @@ class UserForm(FlaskForm):
 class NamerForm(FlaskForm):
 	name = StringField("What's Your Name", validators=[DataRequired()])
 	submit = SubmitField("Submit")
-
-
-
-
-#def index():
-#	return "<h1>Hello World!</h1>"
-
-# FILTERS!!!
-#safe
-#capitalize
-#lower
-#upper
-#title
-#trim
-#striptags
 
 # Create a route decorator
 @app.route('/')
