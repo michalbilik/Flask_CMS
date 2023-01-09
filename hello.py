@@ -6,6 +6,9 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
 from webforms import LoginForm, PostForm, UserForm, PasswordForm, NamerForm
 from flask_ckeditor import CKEditor
+from werkzeug.utils import secure_filename
+import uuid as uuid #unique user ID
+import os #neede to save the profile pic
 
 
 # Create a Flask Instance
@@ -17,6 +20,10 @@ app.config['SECRET_KEY'] = "secret key for CRF"
 
 #Add Database - connecting to MySQL DB
 app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
+
+#Folder to save the images
+UPLOAD_FOLDER = 'static/images/'
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 #Initialize and migrate (after changes) the Database
 db = SQLAlchemy(app)
@@ -128,10 +135,21 @@ def update(id):
 		name_to_update.email = request.form['email']
 		name_to_update.about_author = request.form['about_author']
 		name_to_update.username = request.form['username']
+		#Profile pic:
+		name_to_update.profile_pic = request.files['profile_pic']
+		#grab image name
+		pic_filename = secure_filename(name_to_update.profile_pic.filename)
+		#set unique ID, uuid1 - takes the date and time and randomises 
+		pic_name = str(uuid.uuid1()) + "_" + pic_filename
+  		#Save the image
+		saver = request.files['profile_pic']
+		#change it to a string to save to db
+		name_to_update.profile_pic = pic_name
 		try:
 			db.session.commit()
+			saver.save(os.path.join(app.config['UPLOAD_FOLDER'], pic_name))
 			flash("User Updated Successfully!")
-			return render_template("update.html", 
+			return render_template("dashboard.html", 
 				form=form,
 				name_to_update = name_to_update)
 		except:
@@ -370,6 +388,8 @@ class Users(db.Model, UserMixin):
     email = db.Column(db.String(200), nullable=False, unique=True) #checks if this email was used before
     about_author = db.Column(db.Text(2000), nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
+    #profile pic
+    profile_pic = db.Column(db.String(150), nullable=True)
     #passwords
     password_hash = db.Column(db.String(128))
     
