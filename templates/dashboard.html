@@ -14,11 +14,11 @@
 
 
 
-<h2>Dashboard</h2>
+
 <br/>
 <div class="card">
    <div class="card-header">
-      {{ current_user.name }}
+      <h2 class="pb-2">Dashboard</h2>
    </div>
    <div class="card-body">
       <h5 class="card-title"></h5>
@@ -45,18 +45,43 @@
    </div>
    </p>       
 </div>
-</div>
+
 <br/>
-<div class="card">
-   <div class="card-header">
-      Tools
+
+<div class="container px-4 py-5" id="icon-grid">
+   <h2 class="pb-2 border-bottom">Tools</h2>
+
+   <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 py-5">
+     <div class="col d-flex align-items-start">
+       <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#bootstrap"></use></svg>
+       <div>
+         <h3 class="fw-bold mb-0 fs-4"><a href="{{ url_for('add_user')}}"><button type="button" class="btn btn-dark">Add Admin</button></a></h3>
+         <p> </p>
+       </div>
+     </div>
+     <div class="col d-flex align-items-start">
+       <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"></use></svg>
+       <div>
+         <h3 class="fw-bold mb-0 fs-4"><a href="{{ url_for('add_post')}}"><button type="button" class="btn btn-dark">Add Project</button></a></h3>
+         <p> </p>
+       </div>
+     </div>
+     <div class="col d-flex align-items-start">
+       <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"></use></svg>
+       <div>
+         <h3 class="fw-bold mb-0 fs-4"><button type="button" class="btn btn-dark">Tool 3</button></a></h3>
+         <p> </p>
+       </div>
+     </div>
+     <div class="col d-flex align-items-start">
+       <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#home"></use></svg>
+       <div>
+         <h3 class="fw-bold mb-0 fs-4"><button type="button" class="btn btn-dark">Tool 4</button></a></h3>
+         <p> </p>
+       </div>
+     </div>
    </div>
-   <div class="card-body">
-      <a href="{{ url_for('add_user')}}" class="btn btn-secondary">Add Admin</a>
-      <a href="{{ url_for('add_post')}}" class="btn btn-secondary">Add Project</a>
-   </div>
-</div>
-</div>
+ </div>
 
 
 

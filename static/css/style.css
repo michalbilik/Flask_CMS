@@ -4,13 +4,17 @@ h1 {
 }
 
 body {
-	background: #f4f4f4;
+	/*background: #ffffff;*/
+	background: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))
 
 }
 
-
-#demo{
-	font-size: 12px;
-	color: darkblue;
+.card {
+	height: 100%;
+  }
+  
+.card-body {
+	flex: 1;
 }
+
 

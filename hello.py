@@ -39,8 +39,9 @@ def load_user(user_id):
 # localhost:5000/AboutMe
 @app.route('/aboutMe')
 def aboutMe():
-	return render_template("aboutMe.html")
-
+    #Three latest projects
+    projects = Posts.query.order_by(Posts.date_posted.desc()).limit(3).all()
+    return render_template("aboutMe.html", projects=projects)
 
 # NAME
 @app.route('/contact', methods=['GET', 'POST'])
@@ -177,7 +178,7 @@ def dashboard(): #copied data (below) from Update function so our dashboard has 
 @app.route('/posts')
 def posts():
     # Quering the posts from the dataase
-    posts = Posts.query.order_by(Posts.date_posted)
+    posts = Posts.query.order_by(Posts.date_posted.desc())
     return render_template("posts.html", posts=posts)
 
 #Page for 1 individual post / project

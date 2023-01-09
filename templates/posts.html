@@ -2,6 +2,8 @@
 
 {% block content %}
 
+<h2 class="display-6">Newest project</h2>
+
 
 {% for message in get_flashed_messages() %}
 	<div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -15,7 +17,7 @@
 <!--Loops through posts and displays the data in divs for each post. I will change the link on the title with custom css later-->
 {% for post in posts %}
 <div class="shadow p-3 mb-5 bg-body rounded">
-	<h2><a href="{{url_for('post', id=post.id)}}">{{ post.title }}</a></h2>
+	<h2><a href="{{url_for('post', id=post.id)}}"><small class="text-muted">{{ post.title }}</small></a></h2>
 	<small>By: {{ post.author }}<br/>
 	{{ post.date_posted }}</small> <br/><br/>
 
@@ -26,15 +28,8 @@
     <a href="{{url_for('edit_post', id=post.id)}}" class="btn btn-outline-secondary"> Edit Project</a>
     <a href="{{url_for('delete_post', id=post.id)}}" class="btn btn-outline-danger">Delete Post</a>
     {% endif %}
-
     <br/>
-
 </div>
 <br/>
 {% endfor %}
-
-
-
-
-
 {% endblock %}
