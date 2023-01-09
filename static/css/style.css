@@ -5,7 +5,7 @@ h1 {
 
 body {
 	/*background: #ffffff;*/
-	background: rgba(var(--bs-light-rgb),var(--bs-bg-opacity))
+	color: bg-light;
 
 }
 

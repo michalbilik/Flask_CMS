@@ -26,21 +26,30 @@
       <div class="container">
          <div class="row">
             <div class="col-8"
-            <strong>Name:</strong> {{current_user.name}} <br/>
+            <h1> </h1></br>
+            <strong>Name:</strong> {{current_user.name}} <br/> <!--It isn't strong bc everything else is so the above line was added-->
             <strong>Username:</strong> {{current_user.username}} <br/>
-            <strong>About author:</strong>{{current_user.about_author}}<br/><br/>
-            <strong>User ID:</strong> {{current_user.id}} <br/>
-            <strong>Profile pic:</strong> {{current_user.profile_pic}} <br/>
+            <strong>About author:</strong>{{current_user.about_author}}<br/>
             <strong>Email</strong> {{current_user.email}} <br/>
-            <strong>Data of creation:</strong> {{current_user.date_added}} <br/>
+            <strong>User ID:</strong> {{current_user.id}} <br/>
+            <!--<strong>Profile pic:</strong> {{current_user.profile_pic}} <br/>-->
+            <strong>Date of registration:</strong> {{current_user.date_added}} <br/>
             <br/><br/>
             <a href="{{ url_for('logout')}}" class="btn btn-secondary">Logout</a>
             <a href="{{ url_for('update', id=current_user.id)}}" class="btn btn-secondary">Edit Profile</a>
             <a href="{{ url_for('delete', id=current_user.id)}}" class="btn btn-danger">Delete</a>
          </div>
          <div class="col-4">
+            {% if current_user.profile_pic%}
+            <img src={{ url_for('static',
+            filename='images/' + current_user.profile_pic)}} width="200" align="right">
+            
+            {% else %}
+
             <img src={{ url_for('static',
             filename='images/avatar.png')}} width="200" align="right">
+
+            {% endif %}
          </div>
       </div>
    </div>
