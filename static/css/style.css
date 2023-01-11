@@ -1,12 +1,17 @@
-h1 {
-	color: rgb(79, 79, 96);
-	font-size:60px;
-}
-
 body {
-	/*background: #ffffff;*/
 	color: bg-light;
 
+}
+
+header {
+	min-height: 100vh;
+    min-height: fill-available;
+    min-height: -webkit-fill-available;
+}
+
+html {
+    height: fill-available;
+    height: -webkit-fill-available;
 }
 
 .card {

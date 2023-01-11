@@ -296,7 +296,7 @@ def index():
 		favorite_pizza = favorite_pizza)
  
 @app.route('/add', methods=['GET', 'POST'])
-@login_required 
+#@login_required - Turned off for production reasons
 def add_user():
     name = None
     form = UserForm()

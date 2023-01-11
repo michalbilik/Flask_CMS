@@ -1,5 +1,37 @@
-{% extends 'base.html' %}
 {% block content %}
-Hello this is index page
-test
+
+<!-- Background image -->
+<div
+  class="bg-image lazy"
+  style="
+    background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+    height: 100vh;  background-repeat: no-repeat; background-size: cover; background-position: center center; 
+  "
+>
+  <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+    <div class="d-flex justify-content-center align-items-center h-100">
+      <h1 class="text-white mb-0">
+
+
+        <div class="container col-xxl-8 px-4 py-5">
+          <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
+            <div class="col-10 col-sm-8 col-lg-6">
+              <img src="{{ url_for('static', filename='images/' + profile_image) }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+            </div>
+            <div class="col-lg-6">
+              <h1 class="display-5 fw-bold lh-1 mb-3">Hello, I'm {{current_user.name}}</h1>
+              <p class="lead">Below are my latest projects I've been working on. Click this button to see the rest!</p>
+              <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a class="btn btn-outline-secondary" href="{{ url_for('posts')}}">See all of them</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </h1>
+    </div>
+  </div>
+</div>
+
 {% endblock %}
