@@ -220,7 +220,8 @@ def posts():
 @app.route('/posts/<int:id>')
 def post(id):
     post = Posts.query.get_or_404(id)
-    return render_template('post.html', post=post)
+    post_pic_name = post.post_pic
+    return render_template('post.html', post=post, post_pic_name=post_pic_name)
     
 @app.route('/posts/edit/<int:id>', methods=['GET', 'POST'])
 @login_required
@@ -272,14 +273,24 @@ def add_post():
 	if form.validate_on_submit():
 		post = Posts(title=form.title.data, content=form.content.data, author=form.author.data, slug=form.slug.data)
 		# Clear The Form
-		form.title.data = ''
+		form.title.data = ''  
 		form.content.data = ''
 		form.author.data = ''
 		form.slug.data = ''
-
+		post_pic = request.files['post_pic']
+		#grab image name and make sure it is safe
+		filename = secure_filename(post_pic.filename)
+		#set unique ID, uuid1 - takes the date and time and randomises
+		post_pic_name = str(uuid.uuid1()) + "_" + filename
+		#save the image
+		saver_pic = request.files['post_pic']
+		#we change it to string to save to the db
+		post_pic = post_pic_name
 		# Add post data to database
+		post.post_pic = post_pic_name
 		db.session.add(post)
 		db.session.commit()
+		saver_pic.save(os.path.join(app.config['UPLOAD_FOLDER'], post_pic_name))
 
 		# Return a Message
 		flash("Blog Post Submitted Successfully!")
@@ -395,6 +406,7 @@ class Posts(db.Model):
     author = db.Column(db.String(255))
     date_posted = db.Column(db.DateTime, default=datetime.utcnow)
     slug = db.Column(db.String(255)) #url for a specific post
+    post_pic = db.Column(db.String(150), nullable=True)
  
 
 #Create db Model

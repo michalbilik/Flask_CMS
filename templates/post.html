@@ -15,9 +15,12 @@
 
 <div class="shadow p-3 mb-5 bg-body rounded">
 	<h2><small class="text-muted">{{ post.title }}</small></h2>
+	<h2><small class="text-muted">{{ post_pic_name }}</small></h2>
+	<img src={{ url_for('static', filename='images/' + post_pic_name)}} width="200" align="right">	
+	
+	
 	<!--<small>By: {{ post.author }}<br/>-->
 	{{ post.date_posted }}</small> <br/><br/>
-
 	{{ post.content|safe }}<br/><br/>
     {% if current_user.is_authenticated %}
     <a href="{{url_for('edit_post', id=post.id)}}" class="btn btn-outline-secondary">Edit Post</a>
