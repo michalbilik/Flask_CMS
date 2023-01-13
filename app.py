@@ -51,7 +51,9 @@ def aboutMe():
     #Test to get the profile picture
     user = Users.query.filter_by(id=6).first()
     profile_image = user.profile_pic
-    return render_template("aboutMe.html", projects=projects, id=id,profile_image=profile_image)
+    profile_name = user.name
+    profile_about_author = user.about_author
+    return render_template("aboutMe.html", projects=projects, id=id,profile_image=profile_image,profile_name=profile_name, profile_about_author=profile_about_author)
  	
 
 # NAME
