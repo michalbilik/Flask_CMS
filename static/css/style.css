@@ -1,10 +1,9 @@
 body {
-	color: bg-light;
-
+  background-color: #f8f9fa;
 }
 
 .navbar {
-  height: 50px;
+  height: 45px;
 }
 
 header {
