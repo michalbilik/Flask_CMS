@@ -16,7 +16,15 @@
         <div class="container col-xl-8 px-4 py-5">
           <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
             <div class="col-10 col-sm-8 col-lg-6">
-              <img src="{{ url_for('static', filename='images/' + profile_image) }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" width="700" height="500" loading="lazy">
+              {% if profile_image%}
+              <img src="{{ url_for('static', filename='images/' + profile_image) }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" max-width="500" max-height="500" loading="lazy">
+              
+              {% else %}
+  
+              <img src={{ url_for('static',
+              filename='images/avatar.png')}} width="200" align="right">
+  
+              {% endif %}
             </div>
             <div class="col-lg-6">
               <h1 class="display-5 fw-bold lh-1 mb-3">Hello, I'm </br>{{profile_name}}</h1>
