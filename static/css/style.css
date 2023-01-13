@@ -1,28 +1,28 @@
 body {
-  background-color: #f8f9fa;
-}
-
-.navbar {
-  height: 45px;
-}
-
-header {
-	min-height: 100vh;
-    min-height: fill-available;
-    min-height: -webkit-fill-available;
-}
-
-html {
-    height: fill-available;
-    height: -webkit-fill-available;
-}
-
-.card {
-	height: 100%;
+    background-color: #f8f9fa;
   }
   
-.card-body {
-	flex: 1;
-}
-
-
+  .navbar {
+    height: 45px;
+  }
+  
+  header {
+      min-height: 100vh;
+      min-height: fill-available;
+      min-height: -webkit-fill-available;
+  }
+  
+  html {
+      height: fill-available;
+      height: -webkit-fill-available;
+  }
+  
+  .card {
+      height: 100%;
+    }
+    
+  .card-body {
+      flex: 1;
+  }
+  
+  
