@@ -1,4 +1,4 @@
-#this scripts creates the DB
+#/""this scripts creates the DB
 import mysql.connector 
 
 mydb = mysql.connector.connect(
@@ -9,7 +9,7 @@ mydb = mysql.connector.connect(
 
 my_cursor = mydb.cursor()
 
-#my_cursor.execute("CREATE DATABASE our_users") - uncomment to create a new dabatase, but change the name of it
+#my_cursor.execute("CREATE DATABASE our_users") #- uncomment to create a new dabatase, but change the name of it
 
 my_cursor.execute("SHOW DATABASES")
 for db in my_cursor:

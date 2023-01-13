@@ -49,7 +49,7 @@ def aboutMe():
     #Three latest projects
     projects = Posts.query.order_by(Posts.date_posted.desc()).limit(3).all()
     #Test to get the profile picture
-    user = Users.query.filter_by(id=6).first()
+    user = Users.query.filter_by(id=1).first()
     profile_image = user.profile_pic
     profile_name = user.name
     profile_about_author = user.about_author
