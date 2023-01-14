@@ -14,7 +14,7 @@
 <br/>
 
 <div class="container2">
-	<h2>Latest Projcets</h2>
+	<h2>Latest Projects</h2>
 	{% for post in posts %}
 		{% set post_pic_name = post.post_pic %}
 		<div class="blog-post shadow p-3 mb-5 rounded">
@@ -27,7 +27,7 @@
 				<div class="blog-post_date">
 					<span>{{ post.date_posted }}</span>
 				</div>
-				<p class="blog-post_text">
+				<p class="blog-post_text" style="text-align: justify;">
 					{{ post.content|safe }}
 				</p>
 				<div class="tags">

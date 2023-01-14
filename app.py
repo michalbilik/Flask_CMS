@@ -108,7 +108,7 @@ def logout():
 @login_required
 def delete(id):
 	# Check logged in id vs. id to delete
-	if id == current_user.id:
+	if id != 1:
 		user_to_delete = Users.query.get_or_404(id)
 		name = None
 		form = UserForm()

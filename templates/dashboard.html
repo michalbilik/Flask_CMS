@@ -8,15 +8,10 @@
 	  {{ message }}
 	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
 	</div>
-
-	
 {% endfor %}
-
-
-
-
 <br/>
-<div class="blog-post shadow p-3 mb-5 rounded">
+<div>
+  <div class="blog-post shadow p-3 mb-5 rounded">
    <div class="">
       <h2 class="pb-2">Dashboard</h2>
    </div>
@@ -26,34 +21,49 @@
       <div class="container">
          <div class="row">
             <div class="col-8"
-            <h1> </h1></br>
-            <strong>Name:</strong> {{current_user.name}} <br/> <!--It isn't strong bc everything else is so the above line was added-->
-            <strong>Username:</strong> {{current_user.username}} <br/>
-            <strong>About author:</strong>{{current_user.about_author}}<br/>
-            <strong>Email</strong> {{current_user.email}} <br/>
-            <strong>User ID:</strong> {{current_user.id}} <br/>
-            <strong>Background pic:</strong> {{current_user.profile_background}} <br/>
-            <strong>Date of registration:</strong> {{current_user.date_added}} <br/>
-            <br/><br/>
-            <a href="{{ url_for('logout')}}" class="btn btn-secondary">Logout</a>
-            <a href="{{ url_for('update', id=current_user.id)}}" class="btn btn-secondary">Edit Profile</a>
-            <a href="{{ url_for('delete', id=current_user.id)}}" class="btn btn-danger">Delete</a>
-         </div>
-         <div class="col-4">
-            {% if current_user.profile_pic%}
-            <img src={{ url_for('static',
-            filename='images/' + current_user.profile_pic)}} width="200" align="right">
-            
-            {% else %}
-
-            <img src={{ url_for('static',
-            filename='images/avatar.png')}} width="200" align="right">
-
-            {% endif %}
-         </div>
-      </div>
-   </div>
-   </p>       
+              <h1>Your information:</h1></br></br>
+              <strong>Name:</strong> {{current_user.name}} <br/> <!--It isn't strong bc everything else is so the above line was added-->
+              <strong>Username:</strong> {{current_user.username}} <br/>
+              <strong>About author:</strong>{{current_user.about_author}}<br/>
+              <strong>Email</strong> {{current_user.email}} <br/>
+              <strong>User ID:</strong> {{current_user.id}} <br/>
+              <strong>Background pic:</strong> {{current_user.profile_background}} <br/>
+              <strong>Date of registration:</strong> {{current_user.date_added}} <br/>
+              <br/><br/>
+              <div class="tags">
+                <a href="{{ url_for('logout')}}" class="mx-2">Logout</a>
+                <a href="{{ url_for('update', id=current_user.id)}}" class="mx-2">Edit Profile</a>
+                <a href="{{ url_for('delete', id=current_user.id)}}" class="mx-2" style="color:red;">Delete User</a>
+              </div>
+            </div>
+            <div class="col-4">
+                {% if current_user.profile_pic%}
+                <img src={{ url_for('static',
+                filename='images/' + current_user.profile_pic)}} width="200" align="right">
+                {% else %}
+                <img src={{ url_for('static',
+                filename='images/avatar.png')}} width="200" align="right">
+                {% endif %}
+            </div>
+          </div>
+        </div>    
+      </div>  
+    </div>
+  </div>
+  <div class="blog-post shadow p-3 mb-5 rounded">
+   <div class="container">
+      <div class="row">
+        <div class="col-8"></br>
+          <h2 class="pb-2">Tools</h2>
+          <div class="tags">
+            <a href="{{ url_for('add_user')}}" class="mx-2">Manage moderators</a>
+            <a href="{{ url_for('add_post', id=current_user.id)}}" class="mx-2">Add project</a>
+            <a href="" class="mx-2" >Tool 3</a>
+          </div>
+        </div>
+      </div>    
+    </div>
+  </div>  
 </div>
 
 {% endblock %}
