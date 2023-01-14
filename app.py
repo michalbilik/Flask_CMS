@@ -233,16 +233,32 @@ def edit_post(id):
         post.author = form.author.data
         post.slug = form.slug.data
         post.content = form.content.data
-        #Update database
-        db.session.add(post)
-        db.session.commit()
-        flash("Post has been updated.")
-        return redirect(url_for('post', id=post.id)) #redirects to the edited post
-    form.title.data = post.title
-    form.author.data = post.author
-    form.slug.data = post.slug
-    form.content.data = post.content
-    return render_template('edit_post.html', form=form)
+        if request.files['post_pic']:
+            post_pic = request.files['post_pic']
+            filename = secure_filename(post_pic.filename)
+            post_pic_name = str(uuid.uuid1()) + "_" + filename
+            saver_pic = request.files['post_pic']
+            post_pic = post_pic_name
+            post.post_pic = post_pic_name
+            try:
+                db.session.add(post)
+                db.session.commit()
+                saver_pic.save(os.path.join(app.config['UPLOAD_FOLDER'], post_pic_name))
+                return redirect(url_for('post', id=post.id))
+            except:
+                flash("Error!  Looks like there was a problem...try again!")
+                return redirect(url_for('post', id=post.id))
+        else:
+            db.session.add(post)
+            db.session.commit()
+            return redirect(url_for('post', id=post.id)) #redirects to the edited post
+    else:
+     form.title.data = post.title
+     form.author.data = post.author
+     form.slug.data = post.slug
+     form.content.data = post.content
+     return render_template('edit_post.html', form=form)
+        
 
 @app.route('/posts/delete/<int:id>')
 @login_required

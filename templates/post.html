@@ -1,33 +1,43 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<container class="d-flex flex-column h-100 bg-light">
-{% for message in get_flashed_messages() %}
-	<div class="alert alert-warning alert-dismissible fade show" role="alert">
-	  {{ message }}
-	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-	</div>
-{% endfor %}
-
-<br/>
+<head><link
+	href="{{ url_for('static', filename='css/projects.css') }}"
+	rel="stylesheet"
+  /></head>
 
 
-<div class="shadow p-3 mb-5 bg-body rounded">
-	<h2><small class="text-muted">{{ post.title }}</small></h2>
-	<h2><small class="text-muted">{{ post_pic_name }}</small></h2>
-	<img src={{ url_for('static', filename='images/' + post_pic_name)}} width="200" align="right">	
-	{{ post.date_posted }}</small> <br/><br/>
-	{{ post.content|safe }}<br/><br/>
-    {% if current_user.is_authenticated %}
-    <a href="{{url_for('edit_post', id=post.id)}}" class="btn btn-outline-secondary">Edit Post</a>
-    <a href="{{url_for('delete_post', id=post.id)}}" class="btn btn-outline-danger">Delete Post</a>
-    {% endif %}
+<h2>Latest Projcets</h2>
+
+<div class="container2">
+		<div class="blog-post">
+			<div class="blog-post_img">
+				<img src={{ url_for('static', filename='images/' + post_pic_name)}} alt="">
+			</div>
+			<div class="blog-post_info">
+				<h1 class="blog-post_title">{{ post.title }}</h1>
+				<div class="blog-post_date">
+					<span>{{ post.date_posted }}</span>
+				</div>
+				<p class="blog-post_text">
+					{{ post.content|safe }}
+				</p>
+				<div class="tags">
+				</br>
+				<a href="{{url_for('post', id=post.id)}}" class="mx-2"> View Project</a>  
+				{% if current_user.is_authenticated %}
+				<a href="{{url_for('edit_post', id=post.id)}}" class="mx-2"> Edit Project</a>
+				<a href="{{url_for('delete_post', id=post.id)}}" class="mx-2">Delete Post</a>
+				{% endif %}
+			</div>
+			</div>
+		</div></br>
 </div>
-<br/>
 
 
-<a href="{{url_for('posts')}}" class="btn btn-outline-secondary">Back to projects</a>
+<div class="tags">
+<a href="{{url_for('posts')}}" class="mx-2">Back to projects</a>
+</div>
 
 </container>
 {% endblock %}

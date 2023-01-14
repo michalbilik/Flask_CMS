@@ -12,8 +12,8 @@
 <br/>
 <h2>Edit Post</h2>
 
-<div class="shadow p-3 mb-5 bg-body rounded">
-	<form method="POST">
+<div class="shadow p-3 mb-5 bg-body rounded form">
+	<form method="POST" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
 		{{ form.title.label(class="form-label") }}
@@ -34,6 +34,11 @@
 		{{ form.content.label(class="form-label") }}
 
 		{{ form.content(class="form-control", rows="10") }} <!-- rows determine the size of a form-->
+		<br/>
+
+		{{ form.post_pic.label(class="form-label") }}
+
+		{{ form.post_pic(class="form-control", value=post_pic) }}
 		<br/>
 
 

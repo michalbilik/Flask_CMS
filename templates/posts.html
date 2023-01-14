@@ -1,10 +1,9 @@
 {% extends 'base.html' %}
-
 {% block content %}
-
-<h2 class="display-6">NEWEST PROJECTS</h2>
-
-
+<head><link
+	href="{{ url_for('static', filename='css/projects.css') }}"
+	rel="stylesheet"
+  /></head>
 {% for message in get_flashed_messages() %}
 	<div class="alert alert-warning alert-dismissible fade show" role="alert">
 	  {{ message }}
@@ -14,26 +13,33 @@
 
 <br/>
 
-
-<!--Loops through posts and displays the data in divs for each post. I will change the link on the title with custom css later
-	-->
-{% for post in posts %}
-{% set post_pic_name = post.post_pic %}
-<div class="shadow p-3 mb-5 bg-dark rounded">
-	<h2><a href="{{url_for('post', id=post.id)}}"><small class="text-muted">{{ post.title }}</small></a></h2>
-	<small>By: {{ post.author }}<br/>
-	{{ post.date_posted }}</small> <br/><br/>
-	
-	<img src={{ url_for('static', filename='images/' + post_pic_name)}} width="200" align="right">
-	{{ post.content|safe }}
-    <br/><br/>
-    <a href="{{url_for('post', id=post.id)}}" class="btn btn-outline-secondary"> View Project </a>
-    {% if current_user.is_authenticated %}
-    <a href="{{url_for('edit_post', id=post.id)}}" class="btn btn-outline-secondary"> Edit Project</a>
-    <a href="{{url_for('delete_post', id=post.id)}}" class="btn btn-outline-danger">Delete Post</a>
-    {% endif %}
-    <br/>
+<div class="container2">
+	<h2>Latest Projcets</h2>
+	{% for post in posts %}
+		{% set post_pic_name = post.post_pic %}
+		<div class="blog-post shadow p-3 mb-5 rounded">
+			<div class="blog-post_img">
+				<img src={{ url_for('static', filename='images/' + post_pic_name)}} alt="">
+			</div>
+			<div class="blog-post_info">
+				
+				<h1 class="blog-post_title">{{ post.title }}</h1>
+				<div class="blog-post_date">
+					<span>{{ post.date_posted }}</span>
+				</div>
+				<p class="blog-post_text">
+					{{ post.content|safe }}
+				</p>
+				<div class="tags">
+					</br>
+					<a href="{{url_for('post', id=post.id)}}" class="mx-2"> View Project</a>  
+					{% if current_user.is_authenticated %}
+					<a href="{{url_for('edit_post', id=post.id)}}" class="mx-2"> Edit Project</a>
+					<a href="{{url_for('delete_post', id=post.id)}}" class="mx-2">Delete Post</a>
+					{% endif %}
+				</div>
+			</div>
+		</div></br>
+	{% endfor %}
 </div>
-<br/>
-{% endfor %}
 {% endblock %}

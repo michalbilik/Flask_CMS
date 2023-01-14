@@ -1,28 +1,10 @@
 {% extends 'base.html' %}
 {% include 'index.html' %}
 {% block content %}
-<!--
-<div class="album py-5 bg-light">
-  <div class="container">
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-      {% for post in projects[:3] %}
-      {% set post_pic_name = post.post_pic %}
-        <div class="col" >
-          <div class="card shadow-sm">
-            <large class="text-muted display-6 text-center" >{{ post.title }}</large>
-            <img src={{ url_for('static', filename='images/' + post_pic_name)}} width="200">
-            <div class="card-body">
-              <p class="card-text">{{ post.content|safe  }}</p>
-              <div class="d-flex justify-content-between align-items-center">
-              </div>
-            </div>
-          </div>
-        </div>
-      {% endfor %}
-    </div>
-  </div>
-</div>
--->
+<head><link
+  href="{{ url_for('static', filename='css/cards.css') }}"
+  rel="stylesheet"
+/></head>
 
 <section class="card-list">
   {% for post in projects[:5] %}
@@ -30,8 +12,7 @@
   <article class="card">
     <header class="card-header">
       <p>{{post.date_posted}}</p>
-      <h2>{{ post.title }}</h2>
-      
+      <h2><a style=" color: white;" href="{{url_for('post', id=post.id)}}">{{ post.title }}</a></h2>
     </header>
 
     <div class="card-author">

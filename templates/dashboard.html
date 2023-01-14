@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
 
+{% extends 'base.html' %}
 {% block content %}
 
 {% for message in get_flashed_messages() %}
@@ -16,7 +16,7 @@
 
 
 <br/>
-<div class="shadow p-3 mb-5 bg-dark rounded">
+<div class="blog-post shadow p-3 mb-5 rounded">
    <div class="">
       <h2 class="pb-2">Dashboard</h2>
    </div>
@@ -64,35 +64,116 @@
      <div class="col d-flex align-items-start">
        <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#bootstrap"></use></svg>
        <div>
-         <h3 class="fw-bold mb-0 fs-4"><a href="{{ url_for('add_user')}}"><button type="button" class="btn btn-dark">Add Admin</button></a></h3>
+         <h3 class="fw-bold mb-0 fs-4"><a href="{{ url_for('add_user')}}"><button type="button" class="btn btn-secondary">Add Admin</button></a></h3>
          <p> </p>
        </div>
      </div>
      <div class="col d-flex align-items-start">
        <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#cpu-fill"></use></svg>
        <div>
-         <h3 class="fw-bold mb-0 fs-4"><a href="{{ url_for('add_post')}}"><button type="button" class="btn btn-dark">Add Project</button></a></h3>
+         <h3 class="fw-bold mb-0 fs-4"><a href="{{ url_for('add_post')}}"><button type="button" class="btn btn-secondary">Add Project</button></a></h3>
          <p> </p>
        </div>
      </div>
      <div class="col d-flex align-items-start">
        <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#calendar3"></use></svg>
        <div>
-         <h3 class="fw-bold mb-0 fs-4"><button type="button" class="btn btn-dark">Tool 3</button></a></h3>
+         <h3 class="fw-bold mb-0 fs-4"><button type="button" class="btn btn-secondary">Tool 3</button></a></h3>
          <p> </p>
        </div>
      </div>
      <div class="col d-flex align-items-start">
        <svg class="bi text-muted flex-shrink-0 me-3" width="1.75em" height="1.75em"><use xlink:href="#home"></use></svg>
        <div>
-         <h3 class="fw-bold mb-0 fs-4"><button type="button" class="btn btn-dark">Tool 4</button></a></h3>
+         <h3 class="fw-bold mb-0 fs-4"><button type="button" class="btn btn-secondary">Tool 4</button></a></h3>
          <p> </p>
        </div>
      </div>
    </div>
  </div>
-
-
+  <div class="row">
+    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <h3 class="mb-0">$12.34</h3>
+                <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="icon icon-box-success ">
+                <span class="mdi mdi-arrow-top-right icon-item"></span>
+              </div>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal">Potential growth</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <h3 class="mb-0">$17.34</h3>
+                <p class="text-success ml-2 mb-0 font-weight-medium">+11%</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="icon icon-box-success">
+                <span class="mdi mdi-arrow-top-right icon-item"></span>
+              </div>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal">Revenue current</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <h3 class="mb-0">$12.34</h3>
+                <p class="text-danger ml-2 mb-0 font-weight-medium">-2.4%</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="icon icon-box-danger">
+                <span class="mdi mdi-arrow-bottom-left icon-item"></span>
+              </div>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal">Daily Income</h6>
+        </div>
+      </div>
+    </div>
+    <div class="col-xl-3 col-sm-6 grid-margin stretch-card">
+      <div class="card">
+        <div class="card-body">
+          <div class="row">
+            <div class="col-9">
+              <div class="d-flex align-items-center align-self-start">
+                <h3 class="mb-0">$31.53</h3>
+                <p class="text-success ml-2 mb-0 font-weight-medium">+3.5%</p>
+              </div>
+            </div>
+            <div class="col-3">
+              <div class="icon icon-box-success ">
+                <span class="mdi mdi-arrow-top-right icon-item"></span>
+              </div>
+            </div>
+          </div>
+          <h6 class="text-muted font-weight-normal">Expense current</h6>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 
