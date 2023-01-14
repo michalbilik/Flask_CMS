@@ -53,7 +53,8 @@ def aboutMe():
     profile_image = user.profile_pic
     profile_name = user.name
     profile_about_author = user.about_author
-    return render_template("aboutMe.html", projects=projects, id=id,profile_image=profile_image,profile_name=profile_name, profile_about_author=profile_about_author)
+    profile_background=user.profile_background
+    return render_template("aboutMe.html", projects=projects, id=id,profile_image=profile_image,profile_name=profile_name, profile_about_author=profile_about_author, profile_background=profile_background)
  	
 
 # NAME
@@ -143,6 +144,7 @@ def update(id):
 		name_to_update.email = request.form['email']
 		name_to_update.about_author = request.form['about_author']
 		name_to_update.username = request.form['username']
+		name_to_update.profile_background = request.form['profile_background']
 		#Profile pic:
 		#Check for profile picture
 		if request.files['profile_pic']:
@@ -191,6 +193,7 @@ def dashboard(): #copied data (below) from Update function so our dashboard has 
 		name_to_update.name = request.form['name']
 		name_to_update.email = request.form['email']
 		name_to_update.username = request.form['username']
+		name_to_update.profile_background = request.form['profile_background']
 		try:
 			db.session.commit()
 			flash("User Updated Successfully!")
@@ -320,14 +323,8 @@ def add_post():
 # Create a route decorator
 @app.route('/')
 def index():
-	first_name = "John"
-	stuff = "This is bold text"
 
-	favorite_pizza = ["Pepperoni", "Cheese", "Mushrooms", 41]
-	return render_template("index.html", 
-		first_name=first_name,
-		stuff=stuff,
-		favorite_pizza = favorite_pizza)
+	return render_template("index.html")
  
 @app.route('/add', methods=['GET', 'POST'])
 #@login_required - Turned off for production reasons
@@ -433,10 +430,9 @@ class Users(db.Model, UserMixin):
     email = db.Column(db.String(200), nullable=False, unique=True) #checks if this email was used before
     about_author = db.Column(db.Text(2000), nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
-    #profile pic
     profile_pic = db.Column(db.String(150), nullable=True)
-    #passwords
     password_hash = db.Column(db.String(128))
+    profile_background = db.Column(db.String(300), nullable=True)
     
     @property
     def password(self):

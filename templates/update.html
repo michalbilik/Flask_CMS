@@ -47,6 +47,12 @@
 			{{ form.profile_pic(class="form-control", value=name_to_update.profile_pic) }}
 			<br/>
 
+			
+			{{ form.profile_background.label(class="form-label") }}
+
+			{{ form.profile_background(class="form-control", value=name_to_update.profile_background) }}
+			<br/>
+
 			{{ form.submit(class="btn btn-secondary") }}
 
 			<a href="{{ url_for('delete', id=id)}}" class="btn btn-danger">Delete</a>

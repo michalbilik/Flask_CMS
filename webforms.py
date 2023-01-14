@@ -32,6 +32,7 @@ class UserForm(FlaskForm):
 	password_hash = PasswordField('Password', validators=[DataRequired(), EqualTo('password_hash2', message='Passwords Must Match!')])
 	password_hash2 = PasswordField('Confirm Password', validators=[DataRequired()])
 	profile_pic = FileField("Profile Pic")
+	profile_background = StringField("Background")
 	submit = SubmitField("Submit")
  
 # Create a Form Class
