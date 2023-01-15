@@ -1,19 +1,38 @@
 {% extends 'base.html' %}
 {% block content %}
+{% if flash_message %}
+    <div class="alert alert-success">{{ flash_message }}</div>
+{% endif %}
 
-
-    <h2> Contact form</h2> <br/>
+    <h2>Contact me</h2> <br/>
 
     <br/>
     <form method="POST">
-        {{ form.hidden_tag()}}
+		{{ form.hidden_tag() }}
 
-		{{ form.name.label(class="form-label") }}
+		{{ form.contact_name.label(class="form-label") }}
 
-		{{ form.name(class="form-control") }}
+		{{ form.contact_name(class="form-control") }}
+		<br/>
 
-        
-        <br/>
-        {{form.submit(class="btn btn-primary")}}
+		{{ form.contact_lastname.label(class="form-label") }}
+
+		{{ form.contact_lastname(class="form-control") }}
+		<br/>
+
+        {{ form.contact_email.label(class="form-label") }}
+
+		{{ form.contact_email(class="form-control") }}
+		<br/>
+
+        {{ form.contact_message.label(class="form-label") }}
+
+		{{ form.contact_message(class="form-control") }}
+		<br/>
+
+		
+		<br/>
+
+		{{ form.submit(class="btn btn-secondary") }}
 
 {% endblock %}

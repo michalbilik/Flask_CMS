@@ -35,6 +35,13 @@ class UserForm(FlaskForm):
 	profile_background = StringField("Background")
 	submit = SubmitField("Submit")
  
+class ContactForm(FlaskForm):
+	contact_name = StringField("Name", validators=[DataRequired()])
+	contact_lastname = StringField("Last Name", validators=[DataRequired()])
+	contact_email = StringField("Email", validators=[DataRequired()])
+	contact_message = StringField("Message", validators=[DataRequired()])
+	submit = SubmitField("Submit")
+ 
 # Create a Form Class
 class NamerForm(FlaskForm):
 	name = StringField("", validators=[DataRequired()])

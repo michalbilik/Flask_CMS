@@ -1,14 +1,15 @@
-from flask import Flask, render_template, flash, request, redirect, url_for
+from flask import Flask, render_template, flash, request, redirect, url_for, session
 from datetime import datetime, date
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from werkzeug.security import generate_password_hash, check_password_hash 
 from flask_login import UserMixin, login_user, LoginManager, login_required, logout_user, current_user
-from webforms import LoginForm, PostForm, UserForm, PasswordForm, NamerForm
+from webforms import LoginForm, PostForm, UserForm, PasswordForm, ContactForm
 from flask_ckeditor import CKEditor
 from werkzeug.utils import secure_filename
 import uuid as uuid #unique user ID
 import os #neede to save the profile pic
+from flask_mail import Mail, Message
 
 
 # Create a Flask Instance
@@ -38,7 +39,13 @@ login_manager.login_view = 'login'
 def load_user(user_id):
 	return Users.query.get(int(user_id))
 
-
+app.config['MAIL_SERVER']='smtp.mailtrap.io'
+app.config['MAIL_PORT'] = 2525
+app.config['MAIL_USERNAME'] = '0b55e4b963635c'
+app.config['MAIL_PASSWORD'] = '33c8c6626fa3d0'
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USE_SSL'] = False
+mail = Mail(app)
 
 
 #################################### ROUTES ####################################
@@ -57,24 +64,37 @@ def aboutMe():
     return render_template("aboutMe.html", projects=projects, id=id,profile_image=profile_image,profile_name=profile_name, profile_about_author=profile_about_author, profile_background=profile_background)
  	
 
-# NAME
+# Contact form
 @app.route('/contact', methods=['GET', 'POST'])
-def name():
-	name = None
-	form = NamerForm()
-	# Validate Form
-	if form.validate_on_submit():
-		name = form.name.data
-		form.name.data = ''
+def contact():
+    form = ContactForm()
+    if form.validate_on_submit():
+        admin = Users.query.filter_by(id=1).first()
+        admin_email=admin.email
+        name = form.contact_name.data
+        lastname = form.contact_lastname.data
+        email = form.contact_email.data
+        message = form.contact_message.data
+        topic=name+" "+lastname
+        
+        try:
+            msg = Message(subject = topic , sender = email, recipients = [admin_email])
+            msg.body = message
+            mail.send(msg)
+            session['flash_message'] = "Thanks! I will contact with you as soon as I can."
+            return redirect(url_for('contact'))
+            
+        except:
+            session['flash_message'] = "There was a problem sending this email! Try again."
+            return redirect(url_for('contact'))
+    else:
+        flash_message = session.pop('flash_message', None)
+        return render_template('contact.html', form=form, flash_message=flash_message)
 
-	return render_template("contact.html", 
-		name = name,
-		form = form)
 
-#TESTS
-@app.route('/user/<name>')
-def user(name):
-	return render_template("user.html", user_name=name)
+
+    
+
 
 # Create Login Page
 @app.route('/login', methods=['GET', 'POST'])
@@ -101,7 +121,7 @@ def login():
 @login_required
 def logout():
 	logout_user()
-	flash("You Have Been Logged Out!  Thanks For Stopping By...")
+	flash("You Have Been Logged Out!")
 	return redirect(url_for('login'))
 
 @app.route('/delete/<int:id>')
