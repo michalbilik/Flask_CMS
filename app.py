@@ -54,14 +54,21 @@ mail = Mail(app)
 @app.route('/aboutMe')
 def aboutMe():
     #Three latest projects
-    projects = Posts.query.order_by(Posts.date_posted.desc()).limit(5).all()
+    #projects = Posts.query.order_by(Posts.date_posted.desc()).limit(5).all()
+    projects = Posts.query.filter_by(category='Projects').order_by(Posts.date_posted.desc()).limit(5).all()
+    info_posts = Posts.query.filter_by(category='Information').order_by(Posts.date_posted.desc())
+
     #Test to get the profile picture
     user = Users.query.filter_by(id=1).first()
     profile_image = user.profile_pic
     profile_name = user.name
     profile_about_author = user.about_author
     profile_background=user.profile_background
-    return render_template("aboutMe.html", projects=projects, id=id,profile_image=profile_image,profile_name=profile_name, profile_about_author=profile_about_author, profile_background=profile_background)
+    
+    #Get info_post info
+    
+    
+    return render_template("aboutMe.html", projects=projects, info_posts=info_posts, id=id,profile_image=profile_image,profile_name=profile_name, profile_about_author=profile_about_author, profile_background=profile_background)
  	
 
 # Contact form
@@ -238,7 +245,8 @@ def dashboard(): #copied data (below) from Update function so our dashboard has 
 @app.route('/posts')
 def posts():
     # Quering the posts from the dataase
-    posts = Posts.query.order_by(Posts.date_posted.desc())
+    #posts = Posts.query.order_by(Posts.date_posted.desc())
+    posts = Posts.query.filter_by(category='Projects').order_by(Posts.date_posted.desc())
     return render_template("posts.html", posts=posts)
 
 #Page for 1 individual post / project
@@ -254,6 +262,7 @@ def edit_post(id):
     post = Posts.query.get_or_404(id)
     form = PostForm()
     if form.validate_on_submit():
+        post.category = form.category.data
         post.title = form.title.data
         post.author = form.author.data
         post.slug = form.slug.data
@@ -282,6 +291,7 @@ def edit_post(id):
      form.author.data = post.author
      form.slug.data = post.slug
      form.content.data = post.content
+     post.category = form.category.data
      return render_template('edit_post.html', form=form)
         
 
@@ -312,8 +322,9 @@ def add_post():
 	form = PostForm()
 
 	if form.validate_on_submit():
-		post = Posts(title=form.title.data, content=form.content.data, author=form.author.data, slug=form.slug.data)
+		post = Posts(title=form.title.data, content=form.content.data, author=form.author.data, slug=form.slug.data, category=form.category.data)
 		# Clear The Form
+		form.category.data = ''
 		form.title.data = ''  
 		form.content.data = ''
 		form.author.data = ''
@@ -334,7 +345,7 @@ def add_post():
 		saver_pic.save(os.path.join(app.config['UPLOAD_FOLDER'], post_pic_name))
 
 		# Return a Message
-		flash("Blog Post Submitted Successfully!")
+		flash("Submitted Successfully!")
 
 	# Redirect to the webpage
 	return render_template("add_post.html", form=form)    
@@ -436,6 +447,7 @@ def page_not_found(e):
 #Create a blog post model
 class Posts(db.Model):
     id = db.Column(db.Integer, primary_key=True)
+    category = db.Column(db.String(50))
     title = db.Column(db.String(255))
     content = db.Column(db.Text)
     author = db.Column(db.String(255))

@@ -15,6 +15,11 @@
 	<form method="POST" enctype="multipart/form-data">
 		{{ form.hidden_tag() }}
 
+		{{ form.category.label(class="form-label") }}
+
+		{{ form.category(class="form-select") }}
+		<br/>
+
 		{{ form.title.label(class="form-label") }}
 
 		{{ form.title(class="form-control") }}

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, BooleanField, ValidationError, TextAreaField
+from wtforms import StringField, SubmitField, PasswordField, BooleanField, ValidationError, TextAreaField, SelectField
 from wtforms.validators import DataRequired, EqualTo, Length
 from wtforms.widgets import TextArea
 from flask_ckeditor import CKEditorField
@@ -17,11 +17,11 @@ class LoginForm(FlaskForm):
 # Create a Posts Form
 class PostForm(FlaskForm):
 	title = StringField("Title", validators=[DataRequired()])
-	#content = StringField("Content", validators=[DataRequired()], widget=TextArea())
 	content = CKEditorField('Content', validators=[DataRequired()]) #CKEditor added
 	author = StringField("Author", validators=[DataRequired()])
 	slug = StringField("Slug", validators=[DataRequired()])
 	post_pic = FileField("Post Pic")
+	category = SelectField('Category', choices=[('Projects'), ('Information')])
 	submit = SubmitField("Submit")
  
 class UserForm(FlaskForm):

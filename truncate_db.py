@@ -9,7 +9,7 @@ mydb = mysql.connector.connect(
 
 mycursor = mydb.cursor()
 #mycursor.execute("TRUNCATE TABLE users") #- truncate table
-mycursor.execute("SELECT * FROM users") #- show table content
+mycursor.execute("SELECT * FROM posts") #- show table content
 
 myresult = mycursor.fetchall()
 

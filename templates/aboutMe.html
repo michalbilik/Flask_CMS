@@ -27,18 +27,38 @@
           {{ post.author }}
         </div>
       </div>
-      
     </header>
-
   </article>
   {% endfor %}
 </section>
+<div class="tags">
+  <a href="{{ url_for('posts')}}">See more</a>
+</div>
 
-<section>
-  <div class="tags">
-    <a href="{{ url_for('posts')}}">See more</a>
+</br></br>
+
+<div class="container-info_posts">
+  {% for post in info_posts[:5] %}
+  {% set post_pic_name = post.post_pic %}
+  <div class="row">
+    <div class="col" >
+      <h2 class="">{{ post.title }}</h2></br>
+      <p class="">{{ post.content|safe }}</p>
+    </div>
+    <div class="col">
+      <img class="featurette-image img-fluid mx-auto"  style="" src={{ url_for('static', filename='images/' + post_pic_name)}}>
+    </div>
   </div>
-</section>
-
+  <div class="row">
+    <div class="col order-md-2">
+      <h2 class="">{{ post.title }}</h2></br>
+      <p class="">{{ post.content|safe }}</p>
+    </div>
+    <div class="col order-md-1">
+      <img class="featurette-image img-fluid mx-auto"  style="" src={{ url_for('static', filename='images/' + post_pic_name)}}>
+    </div>
+  </div>
+  {% endfor %}
+</div>
 
 {%endblock%}
