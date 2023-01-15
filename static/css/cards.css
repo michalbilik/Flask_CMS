@@ -28,16 +28,16 @@ a {
 
 .card-list {
     display: flex;
-    width: 60vw;
-    height: 60vh;
-    padding: 3rem;
+    width: 70vw;
+    height: 70vh;
+    padding: 4rem;
     overflow-y: hidden; /* Hide vertical scrollbar */
     overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
 .card {
-    height: 350px;
-    width: 400px;
+    height: 450px;
+    width: 350px;
     min-width: 250px;
     padding: 1.5rem;
     border-radius: 16px;
@@ -110,7 +110,8 @@ a {
     display: grid;
     grid-template-columns: 75px 1fr;
     align-items: center;
-    position: relative;
+    position: absolute;
+    bottom: 1.5rem; 
 }
 
 .author-avatar {

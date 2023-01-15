@@ -47,7 +47,7 @@ def load_user(user_id):
 @app.route('/aboutMe')
 def aboutMe():
     #Three latest projects
-    projects = Posts.query.order_by(Posts.date_posted.desc()).limit(3).all()
+    projects = Posts.query.order_by(Posts.date_posted.desc()).limit(5).all()
     #Test to get the profile picture
     user = Users.query.filter_by(id=1).first()
     profile_image = user.profile_pic

@@ -14,21 +14,22 @@
       <p>{{post.date_posted}}</p>
       <h2><a style=" color: white;" href="{{url_for('post', id=post.id)}}">{{ post.title }}</a></h2></br>
       <img src={{ url_for('static', filename='images/' + post_pic_name)}} alt="" style="">
+      
+      <div class="card-author">
+        <a class="author-avatar">
+          <img src="{{ url_for('static', filename='images/' + profile_image) }}" />
+        </a>
+        <svg class="half-circle" viewBox="0 0 106 57">
+          <path d="M102 4c0 27.1-21.9 49-49 49S4 31.1 4 4"></path>
+        </svg>
+        <div class="author-name">
+          <div class="author-name-prefix">Author</div>
+          {{ post.author }}
+        </div>
+      </div>
+      
     </header>
 
-    <div class="card-author">
-      <a class="author-avatar">
-        <img src="{{ url_for('static', filename='images/' + profile_image) }}" />
-      </a>
-      <svg class="half-circle" viewBox="0 0 106 57">
-        <path d="M102 4c0 27.1-21.9 49-49 49S4 31.1 4 4"></path>
-      </svg>
-
-      <div class="author-name">
-        <div class="author-name-prefix">Author</div>
-        {{ post.author }}
-      </div>
-    </div>
   </article>
   {% endfor %}
 </section>
