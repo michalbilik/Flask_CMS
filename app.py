@@ -68,9 +68,11 @@ def aboutMe():
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
+    admin = Users.query.filter_by(id=1).first()
+    admin_email=admin.email
+    admin_image = admin.profile_pic
+    admin_name = admin.name
     if form.validate_on_submit():
-        admin = Users.query.filter_by(id=1).first()
-        admin_email=admin.email
         name = form.contact_name.data
         lastname = form.contact_lastname.data
         email = form.contact_email.data
@@ -83,13 +85,13 @@ def contact():
             mail.send(msg)
             session['flash_message'] = "Thanks! I will contact with you as soon as I can."
             return redirect(url_for('contact'))
-            
+
         except:
             session['flash_message'] = "There was a problem sending this email! Try again."
             return redirect(url_for('contact'))
     else:
         flash_message = session.pop('flash_message', None)
-        return render_template('contact.html', form=form, flash_message=flash_message)
+        return render_template('contact.html', form=form, flash_message=flash_message, admin_email=admin_email, admin_name=admin_name, admin_image=admin_image)
 
 
 

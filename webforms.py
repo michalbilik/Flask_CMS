@@ -36,11 +36,11 @@ class UserForm(FlaskForm):
 	submit = SubmitField("Submit")
  
 class ContactForm(FlaskForm):
-	contact_name = StringField("Name", validators=[DataRequired()])
-	contact_lastname = StringField("Last Name", validators=[DataRequired()])
-	contact_email = StringField("Email", validators=[DataRequired()])
+	contact_name = StringField("Your name", validators=[DataRequired()])
+	contact_lastname = StringField("Your last name", validators=[DataRequired()])
+	contact_email = StringField("Your email", validators=[DataRequired()])
 	contact_message = StringField("Message", validators=[DataRequired()])
-	submit = SubmitField("Submit")
+	submit = SubmitField("Send")
  
 # Create a Form Class
 class NamerForm(FlaskForm):

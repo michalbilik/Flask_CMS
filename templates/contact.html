@@ -4,35 +4,95 @@
     <div class="alert alert-success">{{ flash_message }}</div>
 {% endif %}
 
-    <h2>Contact me</h2> <br/>
 
-    <br/>
+
+<!--Section: Contact v.2-->
+<section class="mb-4">
+
+    <!--Section heading-->
+    <h2 class="h1-responsive font-weight-bold text-center my-4">Contact me</h2>
+    <!--Section description-->
+    <p class="text-center w-responsive mx-auto mb-5">Do you have any questions? Please do not hesitate to contact me directly. I will come back to you as soon as possible.</p>
+
     <form method="POST">
 		{{ form.hidden_tag() }}
+        <div class="row">
 
-		{{ form.contact_name.label(class="form-label") }}
+            <!--Grid column-->
+            <div class="col-md-9 mb-md-0 mb-5">
+                    <!--Grid row-->
+                    <div class="row">
 
-		{{ form.contact_name(class="form-control") }}
-		<br/>
+                        <!--Grid column-->
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                {{ form.contact_name(class="form-control") }}
+                                {{ form.contact_name.label(class="form-label") }}
+                            </div>
+                        </div>
+                        <!--Grid column-->
 
-		{{ form.contact_lastname.label(class="form-label") }}
+                        <!--Grid column-->
+                        <div class="col-md-6">
+                            <div class="md-form mb-0">
+                                {{ form.contact_lastname(class="form-control") }}
+                                {{ form.contact_lastname.label(class="form-label") }}
+                            </div>
+                        </div>
+                        <!--Grid column-->
 
-		{{ form.contact_lastname(class="form-control") }}
-		<br/>
+                    </div>
+                    <!--Grid row-->
 
-        {{ form.contact_email.label(class="form-label") }}
+                    <!--Grid row-->
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="md-form mb-0">
+                                {{ form.contact_email(class="form-control") }}
+                                {{ form.contact_email.label(class="form-label") }}
+                            </div>
+                        </div>
+                    </div>
+                    <!--Grid row-->
 
-		{{ form.contact_email(class="form-control") }}
-		<br/>
+                    <!--Grid row-->
+                    <div class="row">
 
-        {{ form.contact_message.label(class="form-label") }}
+                        <!--Grid column-->
+                        <div class="col-md-12">
 
-		{{ form.contact_message(class="form-control") }}
-		<br/>
+                            <div class="md-form">
+                                {{ form.contact_message(class="form-control") }}
+                                {{ form.contact_message.label(class="form-label") }}
+                            </div>
 
-		
-		<br/>
+                        </div>
+                    </div>
+                    <!--Grid row-->
 
-		{{ form.submit(class="btn btn-secondary") }}
+                </form>
+
+                <div class=" text-md-left">
+                    {{ form.submit(class="btn btn-secondary") }}
+                </div>
+                <div class="status"></div>
+            </div>
+            <!--Grid column-->
+
+            <!--Grid column-->
+            <div class="col-md-3 text-center">
+                <ul class="list-unstyled mb-0">
+                    <li><i class="fas fa-map-marker-alt fa-2x"></i>
+                        <p>Or write to me directly!</br>
+                            <img src={{ url_for('static', filename='images/' + admin_image)}} style="max-width: 70px; max-height: 70px;"></br>
+                            {{admin_name}}</br>
+                            {{admin_email}}</br>
+                        </p>
+                </ul>
+            </div>
+            <!--Grid column-->
+        </div>
+</section>
+<!--Section: Contact v.2-->
 
 {% endblock %}
