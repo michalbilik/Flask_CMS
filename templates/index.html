@@ -24,13 +24,13 @@
               {% else %}
   
               <img src={{ url_for('static',
-              filename='images/avatar.png')}} width="200" align="right">
+              filename='images/avatar.png')}} style="width="200" align="right" >
   
               {% endif %}
             </div>
             <div class="col-lg-6">
-              <h1 class="display-5 fw-bold lh-1 mb-3">Hello, I'm </br>{{profile_name}}</h1>
-              <p class="lead">{{profile_about_author}}</p>
+              <h1 class="display-5 fw-bold lh-1 mb-3 text-justify">Hello, I'm </br>{{profile_name}}</h1>
+              <p class="lead ">{{profile_about_author}}</p>
             </div>
           </div>
         </div>
