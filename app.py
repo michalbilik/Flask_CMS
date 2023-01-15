@@ -56,7 +56,7 @@ def aboutMe():
     #Three latest projects
     #projects = Posts.query.order_by(Posts.date_posted.desc()).limit(5).all()
     projects = Posts.query.filter_by(category='Projects').order_by(Posts.date_posted.desc()).limit(5).all()
-    info_posts = Posts.query.filter_by(category='Information').order_by(Posts.date_posted.desc())
+    info_posts = Posts.query.filter_by(category='Information').order_by(Posts.date_posted.asc())
 
     #Test to get the profile picture
     user = Users.query.filter_by(id=1).first()

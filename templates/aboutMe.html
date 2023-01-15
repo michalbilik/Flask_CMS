@@ -36,31 +36,6 @@
 </div>
 
 </br></br>
-<!--
-<div class="container-info_posts">
-  {% for post in info_posts%}
-  {% set post_pic_name = post.post_pic %}
-  <div class="row">
-    <div class="col" >
-      <h2 class="">{{ post.title }}</h2></br>
-      <p class="">{{ post.content|safe }}</p>
-    </div>
-    <div class="col">
-      <img class="featurette-image img-fluid mx-auto"  style="" src={{ url_for('static', filename='images/' + post_pic_name)}}>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col order-md-2">
-      <h2 class="">{{ post.title }}</h2></br>
-      <p class="">{{ post.content|safe }}</p>
-    </div>
-    <div class="col order-md-1">
-      <img class="featurette-image img-fluid mx-auto"  style="" src={{ url_for('static', filename='images/' + post_pic_name)}}>
-    </div>
-  </div>
-  {% endfor %}
-</div>
--->
 
 <div class="container-info_posts">
   {% for i in range(0, info_posts.count(), 2) %}
@@ -70,6 +45,12 @@
       <div class="col" >
         <h2 class="">{{ post.title }}</h2></br>
         <p class="">{{ post.content|safe }}</p>
+        <p class="tags">
+        {% if current_user.is_authenticated %}
+        <a href="{{url_for('edit_post', id=post.id)}}" class="mx-2"> Edit Information</a>
+        <a href="{{url_for('delete_post', id=post.id)}}" class="mx-2">Delete Information</a>
+        {% endif %}
+        </p>
       </div>
       <div class="col">
         <img class="featurette-image img-fluid mx-auto"  style="" src={{ url_for('static', filename='images/' + post_pic_name)}}>
@@ -82,6 +63,12 @@
         <div class="col order-md-2">
           <h2 class="">{{ post.title }}</h2></br>
           <p class="">{{ post.content|safe }}</p>
+          <p class="tags">
+          {% if current_user.is_authenticated %}
+          <a href="{{url_for('edit_post', id=post.id)}}" class="mx-2"> Edit Information</a>
+          <a href="{{url_for('delete_post', id=post.id)}}" class="mx-2">Delete Information</a>
+          {% endif %}
+          </p>
         </div>
         <div class="col order-md-1">
           <img class="featurette-image img-fluid mx-auto"  style="" src={{ url_for('static', filename='images/' + post_pic_name)}}>
@@ -93,13 +80,12 @@
 
 
 
+
 <!--
   - change the layout of these information posts to something like this:
   https://grainandmortar.com/about/
 
   - add edit button to these posts / only visible for Admin
-
-  - edit for loop so it displays two different in sequence info_posts
 
   - the SelectField for Project / Information should be nothing at the start value
 
