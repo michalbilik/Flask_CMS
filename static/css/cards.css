@@ -86,12 +86,23 @@ a {
     cursor: pointer;
 }
 
+
 .card-header h2:hover {
     background: linear-gradient(90deg,#ff8a00,#e52e71);
     text-shadow: none;
     -webkit-text-fill-color: transparent;
     -webkit-background-clip: text;
     background-clip: text;
+}
+
+.card-header img {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    margin: auto;
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    background-position: center;
 }
 
 .card-author {
