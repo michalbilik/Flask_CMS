@@ -6,6 +6,8 @@
   rel="stylesheet"
 /></head>
 
+<h1 calss="display-2">My projcets</h2>
+
 <section class="card-list">
   {% for post in projects[:5] %}
   {% set post_pic_name = post.post_pic %}
@@ -31,17 +33,20 @@
   </article>
   {% endfor %}
 </section>
-<div class="tags">
-  <a href="{{ url_for('posts')}}">See more</a>
-</div>
+<section>
+  <div class="tags topcorner" style="">
+    <a href="{{ url_for('posts')}}">See more</a>
+  </div>
+</section>
 
+</br></br></br>
+<h1 calss="display-2">About me</h2>
 </br></br>
-
 <div class="container-info_posts">
   {% for i in range(0, info_posts.count(), 2) %}
     {% set post = info_posts[i] %}
     {% set post_pic_name = post.post_pic %}
-    <div class="row">
+    <div class="row border2">
       <div class="col" >
         <h2 class="">{{ post.title }}</h2></br>
         <p class="">{{ post.content|safe }}</p>
@@ -59,7 +64,7 @@
     {% if i+1 < info_posts.count() %}
       {% set post = info_posts[i+1] %}
       {% set post_pic_name = post.post_pic %}
-      <div class="row">
+      <div class="row border2">
         <div class="col order-md-2">
           <h2 class="">{{ post.title }}</h2></br>
           <p class="">{{ post.title }}</br>{{ post.content|safe }}</p>
