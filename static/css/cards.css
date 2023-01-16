@@ -171,21 +171,23 @@ a {
 }
 
 .container-info_posts h2{
-    padding: 50px 50px 0px 50px;
+    padding: 6rem 1rem 0 1rem;
     text-align: center;
-    align-content: center;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container-info_posts p{
-    padding: 0px 50px;
+    padding: 0 5rem 1rem 5rem;
     text-align: center;
-    align-content: center;
-
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .container-info_posts tags{
-    padding: 0px 50px;
+    padding: 2rem 1rem 0 1rem;
     text-align: center;
     align-content: center;
 

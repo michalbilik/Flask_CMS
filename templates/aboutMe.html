@@ -62,7 +62,7 @@
       <div class="row">
         <div class="col order-md-2">
           <h2 class="">{{ post.title }}</h2></br>
-          <p class="">{{ post.content|safe }}</p>
+          <p class="">{{ post.title }}</br>{{ post.content|safe }}</p>
           <p class="tags">
           {% if current_user.is_authenticated %}
           <a href="{{url_for('edit_post', id=post.id)}}" class="mx-2"> Edit Information</a>
