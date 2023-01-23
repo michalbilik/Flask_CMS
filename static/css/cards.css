@@ -97,15 +97,16 @@ a {
     background-clip: text;
 }
 
+
+
 .card-header img {
-    max-width: 100%;
-    height: auto;
-    max-height: 200px;
-    margin: auto;
-    background-repeat: no-repeat; 
-    background-size: cover; 
-    background-position: center;
+    object-fit: cover;
+    width: 250px;
+    height: 250px;
 }
+
+
+
 
 .card-author {
     margin: 3rem 0 0;

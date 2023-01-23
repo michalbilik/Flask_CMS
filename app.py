@@ -317,7 +317,7 @@ def delete_post(id):
         
 #html website to add posts
 @app.route('/add-post', methods=['GET', 'POST'])
-#@login_required
+@login_required
 def add_post():
 	form = PostForm()
 
