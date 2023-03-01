@@ -307,12 +307,12 @@ def delete_post(id):
         #Return a message
         flash("Blog post was deleted!")
         #Redirect to quered posts
-        posts = Posts.query.order_by(Posts.date_posted)
+        posts = Posts.query.order_by(Posts.date_posted.desc())
         return render_template("posts.html", posts=posts)
     
     except:
         flash("There was a problem with deleting the  project")
-        posts = Posts.query.order_by(Posts.date_posted)
+        posts = Posts.query.order_by(Posts.date_posted.desc())
         return render_template("posts.html", posts=posts)
         
 #html website to add posts
