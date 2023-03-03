@@ -20,7 +20,7 @@ ckeditor = CKEditor(app)
 app.config['SECRET_KEY'] = "secret key for CRF"
 
 #Add Database - connecting to MySQL DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgressql://kskiwdwpfzhxze:025f288af468d547bd7671b4f3424b0e92ff9f207283124f69f9de1c34e8dec7@ec2-34-197-84-74.compute-1.amazonaws.com:5432/decl7avrh3j6qd'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kskiwdwpfzhxze:025f288af468d547bd7671b4f3424b0e92ff9f207283124f69f9de1c34e8dec7@ec2-34-197-84-74.compute-1.amazonaws.com:5432/decl7avrh3j6qd'
 
 #app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
 
