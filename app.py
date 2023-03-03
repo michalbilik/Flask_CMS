@@ -20,7 +20,9 @@ ckeditor = CKEditor(app)
 app.config['SECRET_KEY'] = "secret key for CRF"
 
 #Add Database - connecting to MySQL DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://kskiwdwpfzhxze:025f288af468d547bd7671b4f3424b0e92ff9f207283124f69f9de1c34e8dec7@ec2-34-197-84-74.compute-1.amazonaws.com:5432/decl7avrh3j6qd'
+
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
 
 #Folder to save the images
 UPLOAD_FOLDER = 'static/images/'
@@ -462,7 +464,7 @@ class Users(db.Model, UserMixin):
     username = db.Column(db.String(20), nullable=False, unique=True)
     name = db.Column(db.String(50), nullable=False) #nullabe=False this feeld cannot be empty
     email = db.Column(db.String(200), nullable=False, unique=True) #checks if this email was used before
-    about_author = db.Column(db.Text(2000), nullable=True)
+    about_author = db.Column(db.Text(), nullable=True)
     date_added = db.Column(db.DateTime, default=datetime.utcnow)
     profile_pic = db.Column(db.String(150), nullable=True)
     password_hash = db.Column(db.String(128))
