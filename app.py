@@ -357,10 +357,13 @@ def add_post():
 
       
 # Create a route decorator
+#@app.route('/')
+#def index():
+#    return render_template("index.html")
+
 @app.route('/')
 def index():
-
-	return render_template("aboutMe.html")
+    return redirect(url_for('aboutMe'))
  
 @app.route('/add', methods=['GET', 'POST'])
 #@login_required - Turned off for production reasons
