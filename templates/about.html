@@ -13,7 +13,7 @@
   {% set post_pic_name = post.post_pic %}
   <article class="card">
     <header class="card-header">
-      <p>{{post.date_posted}}</p>
+      <p>{{ post.date_posted.strftime('%d %B %Y') }}</p>
       <h2><a style=" color: white;" href="{{url_for('post', id=post.id)}}">{{ post.title }}</a></h2></br>
       <img src={{ url_for('static', filename='images/' + post_pic_name)}} alt="" style="">
       
