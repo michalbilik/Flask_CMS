@@ -19,10 +19,11 @@ ckeditor = CKEditor(app)
 #Secret Key
 app.config['SECRET_KEY'] = "secret key for CRF"
 
-#Add Database - connecting to MySQL DB
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kskiwdwpfzhxze:025f288af468d547bd7671b4f3424b0e92ff9f207283124f69f9de1c34e8dec7@ec2-34-197-84-74.compute-1.amazonaws.com:5432/decl7avrh3j6qd'
+#Postgres database
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kskiwdwpfzhxze:025f288af468d547bd7671b4f3424b0e92ff9f207283124f69f9de1c34e8dec7@ec2-34-197-84-74.compute-1.amazonaws.com:5432/decl7avrh3j6qd'
 
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
+#Local database
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
 
 #Folder to save the images
 UPLOAD_FOLDER = 'static/images/'
@@ -359,13 +360,16 @@ def add_post():
 @app.route('/')
 def index():
 
-	return render_template("index.html")
+	return render_template("aboutMe.html")
  
 @app.route('/add', methods=['GET', 'POST'])
 #@login_required - Turned off for production reasons
 def add_user():
     name = None
     form = UserForm()
+    user_count = Users.query.count() # count the number of users in the database
+    if user_count >= 1: # check if there is already a user in the database
+        return "User creation is not allowed."
     if form.validate_on_submit(): #if the form is submited and it is valid then
         user = Users.query.filter_by(email=form.email.data).first() #we check if the new user exists with this email
         if user is None: #if user doesn't eixsts
