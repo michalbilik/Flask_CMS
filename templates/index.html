@@ -1,45 +1,25 @@
 {% block content %}
 
-<!-- Background image -->
-<div
-  class="bg-image lazy"
-  style="
-    background-image: url('{{profile_background}}');
-    height: 100vh;  
-    background-repeat: no-repeat; 
-    background-size: cover; 
-    background-position: center; ">
-  
-  <div class="mask" style="background-color: rgba(0, 0, 0, 0.1);">
-    <div class="d-flex justify-content-center align-items-center h-100">
-      <h1 class="text-white mb-0">
-        
-
-        <div class="container col-xl-8 px-4 py-5">
-          <div class="row flex-lg-row-reverse align-items-center g-5 py-5">
-            <div class="col-10 col-sm-8 col-lg-6">
-              {% if profile_image%}
-              <img src="{{ url_for('static', filename='images/' + profile_image) }}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" style="max-width: 300px; max-hight: 300px;"" loading="lazy">
-              
-              {% else %}
-  
-              <img src={{ url_for('static',
-              filename='images/avatar.png')}} style="width="200" align="right" >
-  
-              {% endif %}
-            </div>
-            <div class="col-lg-6">
-              <h1 class="display-5 fw-bold lh-1 mb-3 text-justify">Hi, I'm </br>{{profile_name}}</h1>
-              <p class="lead ">{{profile_about_author}}</p>
-            </div>
-          </div>
+<div class="bg-image lazy" style="background-image: url('{{profile_background}}'); height: 100vh; background-repeat: no-repeat; background-size: cover; background-position: center;">
+  <div class="mask" style="background-color: rgba(0, 0, 0, 0.1); height: 100%; display: flex; align-items: center; justify-content: center;">
+    <div class="container" >
+      <div class="row justify-content-center align-items-center">
+        <div class="col-lg-6 order-lg-2">
+          {% if profile_image %}
+            <img src="{{ url_for('static', filename='images/' + profile_image) }}" class="d-block mx-auto img-fluid" alt="Profile Image" style="max-width: 350px; max-height: 350px;" loading="lazy">
+          {% else %}
+            <img src="{{ url_for('static', filename='images/avatar.png') }}" style="width: 200px;">
+          {% endif %}
         </div>
-
-
-      </h1>
+        <div class="col-lg-6 order-lg-1" style="max-width: 500px;">
+          <h1 class="display-5 fw-bold lh-1 mb-3 text-justify text-white">Hi, I'm {{profile_name}}</h1>
+          <p class="lead text-justify text-white" style="text-align: justify !important;">{{profile_about_author}}</p>
+        </div>        
+      </div>
     </div>
   </div>
 </div>
+
 
 <script>
   // Get the background image element
