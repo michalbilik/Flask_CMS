@@ -1,59 +1,49 @@
-{% extends 'base.html' %}
-
-{% block content %}
-
-{% for message in get_flashed_messages() %}
-	<div class="alert alert-warning alert-dismissible fade show" role="alert">
-	  {{ message }}
-	  <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-	</div>
+{% extends 'base.html' %} {% block content %} {% for message in
+get_flashed_messages() %}
+<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  {{ message }}
+  <button
+    type="button"
+    class="btn-close"
+    data-bs-dismiss="alert"
+    aria-label="Close"
+  ></button>
+</div>
 {% endfor %}
 
 <h1>Add Project</h1>
-	<br/>
+<br />
 <div class="shadow p-3 mb-5 bg-body rounded">
-	<form method="POST" enctype="multipart/form-data">
-		{{ form.hidden_tag() }}
+  <form method="POST" enctype="multipart/form-data">
+    {{ form.hidden_tag() }} {{ form.category.label(class="form-label") }} {{
+    form.category(class="form-select") }}
+    <br />
 
-		{{ form.category.label(class="form-label") }}
+    {{ form.title.label(class="form-label") }} {{
+    form.title(class="form-control") }}
+    <br />
 
-		{{ form.category(class="form-select") }}
-		<br/>
+    {{ form.author.label(class="form-label") }} {{
+    form.author(class="form-control") }}
+    <br />
 
-		{{ form.title.label(class="form-label") }}
+    {{ form.slug.label(class="form-label") }} {{ form.slug(class="form-control")
+    }}
+    <br />
 
-		{{ form.title(class="form-control") }}
-		<br/>
+    {{ form.content.label(class="form-label") }} {{
+    form.content(class="form-control", rows="10") }}
+    <!-- rows determine the size of a form-->
+    <br />
 
-		{{ form.author.label(class="form-label") }}
+    {{ form.post_pic.label(class="form-label") }} {{
+    form.post_pic(class="form-control", value=post_pic) }}
+    <br />
 
-		{{ form.author(class="form-control") }}
-		<br/>
+    {{ form.submit(class="btn btn-secondary") }}
+  </form>
 
-		{{ form.slug.label(class="form-label") }}
-
-		{{ form.slug(class="form-control") }}
-		<br/>
-
-		{{ form.content.label(class="form-label") }}
-
-		{{ form.content(class="form-control", rows="10") }} <!-- rows determine the size of a form-->
-		<br/>
-		
-
-		{{ form.post_pic.label(class="form-label") }}
-
-		{{ form.post_pic(class="form-control", value=post_pic) }}
-		<br/>
-
-
-		{{ form.submit(class="btn btn-secondary") }}
-	</form>
-
-    {{ ckeditor.load(pkg_type="full") }}
-    {{ ckeditor.config(name='content') }}
+  {{ ckeditor.load(pkg_type="full") }} {{ ckeditor.config(name='content') }}
 </div>
-
-
 
 {% endblock %}

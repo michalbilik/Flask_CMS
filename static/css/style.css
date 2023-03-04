@@ -1,62 +1,62 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap');  
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap");
 .navbar {
-    height: 45px;
-    background-color: rgba(255,255,255,0.3);
-    box-shadow: #3F3B37;
-  }
-  
+  height: 45px;
+  background-color: rgba(255, 255, 255, 0.3);
+  box-shadow: #3f3b37;
+}
+
 header {
-      min-height: 100vh;
-      min-height: fill-available;
-      min-height: -webkit-fill-available;
-  }
-  
+  min-height: 100vh;
+  min-height: fill-available;
+  min-height: -webkit-fill-available;
+}
+
 html {
-      height: fill-available;
-      height: -webkit-fill-available;
-  }
-  
+  height: fill-available;
+  height: -webkit-fill-available;
+}
+
 body {
-    padding: 0;
-    margin: 0;
-    background-color: #B2B2A8;
-    color: #000000;
-    font-family: "PPNeueMachina","apercu",sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #b2b2a8;
+  color: #000000;
+  font-family: "PPNeueMachina", "apercu", sans-serif;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 .tags {
-    margin: 1rem 0 2rem;
-    padding: .5rem 0 1rem;
-    line-height: 2;
-    margin-bottom: 0;
+  margin: 1rem 0 2rem;
+  padding: 0.5rem 0 1rem;
+  line-height: 2;
+  margin-bottom: 0;
 }
 
 .tags a {
-    font-style: normal;
-    font-weight: 700;
-    font-size: .5rem;
-    color: #28242f;
-    text-transform: uppercase;
-    font-size: .66rem;
-    border: 3px solid #3F3B37;
-    border-radius: 2rem;
-    padding: .2rem .85rem .25rem;
-    position: relative;
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.5rem;
+  color: #28242f;
+  text-transform: uppercase;
+  font-size: 0.66rem;
+  border: 3px solid #3f3b37;
+  border-radius: 2rem;
+  padding: 0.2rem 0.85rem 0.25rem;
+  position: relative;
 }
 
 .tags a:hover {
-    background: linear-gradient(90deg,#ff8a00,#e52e71);
-    text-shadow: none;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
-    border-color: #3F3B37;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  text-shadow: none;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  border-color: #3f3b37;
 }
 
 .blog-post {
-    background-color: #a7a799;
+  background-color: #a7a799;
 }

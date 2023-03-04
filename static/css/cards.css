@@ -1,207 +1,197 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap');  
+@import url("https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&display=swap");
 .navbar {
-    height: 45px;
-  }
-  
+  height: 45px;
+}
+
 header {
-      min-height: 100vh;
-      min-height: fill-available;
-      min-height: -webkit-fill-available;
-  }
-  
+  min-height: 100vh;
+  min-height: fill-available;
+  min-height: -webkit-fill-available;
+}
+
 html {
-      height: fill-available;
-      height: -webkit-fill-available;
-  }
-  
+  height: fill-available;
+  height: -webkit-fill-available;
+}
+
 body {
-    padding: 0;
-    margin: 0;
-    background-color: #B2B2A8;
-    color: #000000;
-    font-family: "PPNeueMachina","apercu",sans-serif;
+  padding: 0;
+  margin: 0;
+  background-color: #b2b2a8;
+  color: #000000;
+  font-family: "PPNeueMachina", "apercu", sans-serif;
 }
 
 a {
-    text-decoration: none;
+  text-decoration: none;
 }
 
-
 .card-list {
-    display: flex;
-    width: 80vw;
-    height: 60vh;
-    
-    padding: 4rem 4rem 1rem 4rem;
-    overflow-y: hidden; /* Hide vertical scrollbar */
-    overflow-x: hidden; /* Hide horizontal scrollbar */
+  display: flex;
+  width: 80vw;
+  height: 60vh;
+
+  padding: 4rem 4rem 1rem 4rem;
+  overflow-y: hidden; /* Hide vertical scrollbar */
+  overflow-x: hidden; /* Hide horizontal scrollbar */
 }
 
 .card {
-    height: 450px;
-    width: 350px;
-    min-width: 250px;
-    padding: 1.5rem;
-    border-radius: 16px;
-    background: #B2B2A8;
-    box-shadow: -1rem 0 3rem #818179;
-    display: flex;
-    flex-direction: column;
-    transition: .2s;
-    margin: 0;
-    scroll-snap-align: start;
-    clear: both;
-    position: relative;
+  height: 450px;
+  width: 350px;
+  min-width: 250px;
+  padding: 1.5rem;
+  border-radius: 16px;
+  background: #b2b2a8;
+  box-shadow: -1rem 0 3rem #818179;
+  display: flex;
+  flex-direction: column;
+  transition: 0.2s;
+  margin: 0;
+  scroll-snap-align: start;
+  clear: both;
+  position: relative;
 }
 
-.card:focus-within~.card, .card:hover~.card {
-    transform: translateX(130px);
+.card:focus-within ~ .card,
+.card:hover ~ .card {
+  transform: translateX(130px);
 }
 
 .card:hover {
-    transform: translateY(-1rem);
+  transform: translateY(-1rem);
 }
 
 .card:not(:first-child) {
-    margin-left: -130px;
+  margin-left: -130px;
 }
 
-
 .card-header {
-    margin-bottom: auto;
-    background-color: #B2B2A8;
+  margin-bottom: auto;
+  background-color: #b2b2a8;
 }
 
 .card-header p {
-    font-size: 14px;
-    margin: 0 0 1rem;
-    color: #4c4c55;
+  font-size: 14px;
+  margin: 0 0 1rem;
+  color: #4c4c55;
 }
 
 .card-header h2 {
-    color: #3F3B37;
-    font-size: 20px;
-    margin: .25rem 0 auto;
-    text-decoration: none;
-    border: 0;
-    display: inline-block;
-    cursor: pointer;
+  color: #3f3b37;
+  font-size: 20px;
+  margin: 0.25rem 0 auto;
+  text-decoration: none;
+  border: 0;
+  display: inline-block;
+  cursor: pointer;
 }
-
 
 .card-header h2:hover {
-    background: linear-gradient(90deg,#ff8a00,#e52e71);
-    text-shadow: none;
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
-    background-clip: text;
+  background: linear-gradient(90deg, #ff8a00, #e52e71);
+  text-shadow: none;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
 }
-
-
 
 .card-header img {
-    object-fit: cover;
-    width: 250px;
-    height: 250px;
+  object-fit: cover;
+  width: 250px;
+  height: 250px;
+  aspect-ratio: 1 / 1;
+  margin: 0 auto;
 }
 
-
-
-
 .card-author {
-    margin: 3rem 0 0;
-    display: grid;
-    grid-template-columns: 75px 1fr;
-    align-items: center;
-    position: absolute;
-    bottom: 1.5rem; 
+  margin: 3rem 0 0;
+  display: grid;
+  grid-template-columns: 75px 1fr;
+  align-items: center;
+  position: absolute;
+  bottom: 1.5rem;
 }
 
 .author-avatar {
-    grid-area: auto;
-    align-self: start;
-    position: relative;
-    box-sizing: border-box;
+  grid-area: auto;
+  align-self: start;
+  position: relative;
+  box-sizing: border-box;
 }
 
 .author-avatar img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    filter: grayscale(100%);
-    display: block;
-    overflow: hidden;
-    margin: 16px 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  filter: grayscale(100%);
+  display: block;
+  overflow: hidden;
+  margin: 16px 10px;
 }
 
 .author-name {
-    grid-area: auto;
-    box-sizing: border-box;
+  grid-area: auto;
+  box-sizing: border-box;
 }
 
 .author-name-prefix {
-    font-style: normal;
-    font-weight: 700;
-    color: #3F3B37;
+  font-style: normal;
+  font-weight: 700;
+  color: #3f3b37;
 }
 
 .half-circle {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 60px;
-    height: 48px;
-    fill: none;
-    stroke: #e87503;
-    stroke-width: 8;
-    stroke-linecap: round;
-    pointer-events: none;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 48px;
+  fill: none;
+  stroke: #e87503;
+  stroke-width: 8;
+  stroke-linecap: round;
+  pointer-events: none;
 }
 
-
-
-
-.container-info_posts img{
-    width: auto;
-    height: 100%;
-    aspect-ratio: 1;
-    object-fit: cover;
-    padding: 0;
+.container-info_posts img {
+  width: auto;
+  height: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  padding: 0;
 }
 
-.container-info_posts div{
-    padding: 0;
+.container-info_posts div {
+  padding: 0;
 }
 
-.container-info_posts h2{
-    padding: 6rem 1rem 0 1rem;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.container-info_posts h2 {
+  padding: 6rem 1rem 0 1rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.container-info_posts p{
-    padding: 0 5rem 1rem 5rem;
-    text-align: center;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.container-info_posts p {
+  padding: 0 5rem 1rem 5rem;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.container-info_posts tags{
-    padding: 2rem 1rem 0 1rem;
-    text-align: center;
-    align-content: center;
-
+.container-info_posts tags {
+  padding: 2rem 1rem 0 1rem;
+  text-align: center;
+  align-content: center;
 }
 
 .border2 {
-    border-top:    0.5px solid  black;
-    border-bottom:    0.5px solid  black;
+  border-top: 0.5px solid black;
+  border-bottom: 0.5px solid black;
 }
 
-.topcorner{
-    white-space: nowrap ;
-   }
-
+.topcorner {
+  white-space: nowrap;
+}
