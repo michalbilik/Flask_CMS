@@ -53,9 +53,9 @@ mail = Mail(app)
 
 #################################### ROUTES ####################################
 
-# localhost:5000/AboutMe
-@app.route('/aboutMe')
-def aboutMe():
+# localhost:5000/about
+@app.route('/about')
+def about():
     #Three latest projects
     #projects = Posts.query.order_by(Posts.date_posted.desc()).limit(5).all()
     projects = Posts.query.filter_by(category='Projects').order_by(Posts.date_posted.desc()).limit(5).all()
@@ -71,7 +71,7 @@ def aboutMe():
     #Get info_post info
     
     
-    return render_template("aboutMe.html", projects=projects, info_posts=info_posts, id=id,profile_image=profile_image,profile_name=profile_name, profile_about_author=profile_about_author, profile_background=profile_background)
+    return render_template("about.html", projects=projects, info_posts=info_posts, id=id,profile_image=profile_image,profile_name=profile_name, profile_about_author=profile_about_author, profile_background=profile_background)
  	
 
 # Contact form
@@ -356,14 +356,10 @@ def add_post():
 
 
       
-# Create a route decorator
-#@app.route('/')
-#def index():
-#    return render_template("index.html")
-
+#index
 @app.route('/')
 def index():
-    return redirect(url_for('aboutMe'))
+    return redirect(url_for('about'))
  
 @app.route('/add', methods=['GET', 'POST'])
 #@login_required - Turned off for production reasons
