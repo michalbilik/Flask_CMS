@@ -33,7 +33,7 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 
-# Flask_Login Stuff
+# Flask_Login
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = 'login'
@@ -426,7 +426,6 @@ def test_pw():
 
  
 ########################			JSON TEST 		########################################################
-
 
 #Json test
 @app.route('/date')
