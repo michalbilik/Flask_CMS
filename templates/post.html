@@ -17,7 +17,7 @@
 			<div class="blog-post_info">
 				<h1 class="blog-post_title">{{ post.title }}</h1>
 				<div class="blog-post_date">
-					<span>{{ post.date_posted }}</span>
+					<span>{{ post.date_posted.strftime('%d %B %Y') }}</span>
 				</div>
 				<p class="blog-post_text">
 					{{ post.content|safe }}
