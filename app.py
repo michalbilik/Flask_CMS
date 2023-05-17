@@ -10,20 +10,23 @@ from werkzeug.utils import secure_filename
 import uuid as uuid #unique user ID
 import os #neede to save the profile pic
 from flask_mail import Mail, Message
+from dotenv import load_dotenv 
 
+# Load environment variables from .env file
+load_dotenv()
 
 # Create a Flask Instance
 app = Flask(__name__)
 ckeditor = CKEditor(app)
 
 #Secret Key
-app.config['SECRET_KEY'] = "secret key for CRF"
+app.config['SECRET_KEY'] = os.getenv('SECRET_KEY') 
 
 #Postgres database
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://qglwjshetbfsyj:f4b72ab53e8f3d0308e3ce8ca57a0ab502661afcefadb91f707d4751297eb8d7@ec2-52-5-110-35.compute-1.amazonaws.com:5432/d6omjr00gd5huv'
+#app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('SQLALCHEMY_DATABASE_URI')
 
 #Local database
-#app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:password123@localhost/our_users'
 
 #Folder to save the images
 UPLOAD_FOLDER = 'static/images/'
@@ -44,8 +47,8 @@ def load_user(user_id):
 
 app.config['MAIL_SERVER']='smtp.mailtrap.io'
 app.config['MAIL_PORT'] = 2525
-app.config['MAIL_USERNAME'] = '0b55e4b963635c'
-app.config['MAIL_PASSWORD'] = '33c8c6626fa3d0'
+app.config['MAIL_USERNAME'] = os.getenv('MAIL_USERNAME')
+app.config['MAIL_PASSWORD'] = os.getenv('MAIL_PASSWORD')
 app.config['MAIL_USE_TLS'] = True
 app.config['MAIL_USE_SSL'] = False
 mail = Mail(app)
