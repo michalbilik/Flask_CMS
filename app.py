@@ -10,7 +10,8 @@ from werkzeug.utils import secure_filename
 import uuid as uuid #unique user ID
 import os #neede to save the profile pic
 from flask_mail import Mail, Message
-from dotenv import load_dotenv 
+from dotenv import load_dotenv
+from sqlalchemy import text
 
 # Load environment variables from .env file
 load_dotenv()
@@ -114,22 +115,20 @@ def contact():
 # Create Login Page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-	form = LoginForm()
-	if form.validate_on_submit():
-		user = Users.query.filter_by(username=form.username.data).first()
-		if user:
-			# Check the hash
-			if check_password_hash(user.password_hash, form.password.data):
-				login_user(user)
-				flash("Login Succesfull.")
-				return redirect(url_for('dashboard'))
-			else:
-				flash("Wrong password or user - Try Again!")
-		else:
-			flash("Wrong password or user - Try Again!")
+    form = LoginForm()
+    if form.validate_on_submit():
+        user = Users.query.filter(text("username = :username")).params(username=form.username.data).first()
+        if user:
+            if user.verify_password(form.password.data):
+                login_user(user)
+                flash("Login Successful.")
+                return redirect(url_for('dashboard'))
+            else:
+                flash("Wrong password or username - Try Again!")
+        else:
+            flash("Wrong password or username - Try Again!")
 
-
-	return render_template('login.html', form=form)
+    return render_template('login.html', form=form)
 
 #Create Logout Page
 @app.route('/logout', methods=['GET', 'POST'])
